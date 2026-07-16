@@ -1,0 +1,80 @@
+﻿@model SIGEBOM.Datos.Models.Rol
+
+@{
+    ViewData["Title"] = "Desactivar Rol";
+}
+
+<div class="container">
+
+    <div class="card shadow border-danger">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+                Desactivar Rol
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+
+                <strong>¿Está seguro de desactivar este rol?</strong>
+
+            </div>
+
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    Nombre
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.NombreRol
+                </dd>
+
+                <dt class="col-sm-3">
+                    Estado
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.Estado
+                </dd>
+
+            </dl>
+
+            <form asp-action="Desactivar">
+
+                <input type="hidden"
+                       asp-for="IdRol" />
+
+                <div class="d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Cancelar
+
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+
+                        <i class="bi bi-trash"></i>
+
+                        Desactivar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

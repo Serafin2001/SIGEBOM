@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SIGEBOM.Datos.Models.Bombero>
+
+<table class="table table-hover align-middle">
+
+    <thead>
+
+        <tr>
+
+            <th style="width:18%">Rango</th>
+
+            <th style="width:18%">Cédula</th>
+
+            <th>Nombre Completo</th>
+
+            <th style="width:18%">Cargo</th>
+
+            <th style="width:130px" class="text-center">
+
+                Acción
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.Rango?.NombreRango</td>
+
+                    <td>@item.Cedula</td>
+
+                    <td>@item.NombreCompleto</td>
+
+                    <td>@(item.Cargo?.NombreCargo ?? "Sin cargo")</td>
+
+                    <td class="text-center">
+
+                        <button type="button"
+                                class="btn btn-success seleccionarBombero"
+                                data-id="@item.IdBombero"
+                                data-nombre="@item.NombreCompleto">
+
+                            <i class="bi bi-check-circle"></i>
+
+                            Seleccionar
+
+                        </button>
+
+                    </td>
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+
+                <td colspan="5" class="text-center py-4">
+
+                    No existen bomberos disponibles.
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

@@ -1,0 +1,498 @@
+﻿/*=========================================
+    VARIABLES
+=========================================*/
+
+:root {
+    --sidebar-width: 280px;
+    --topbar-height: 75px;
+    --primary: #b71c1c;
+    --primary-dark: #8c1111;
+    --secondary: #263238;
+    --background: #f4f6f9;
+    --white: #ffffff;
+    --border: #e4e6ef;
+    --text: #374151;
+    --text-light: #6b7280;
+    --hover: #f8f9fa;
+    --shadow: 0 5px 20px rgba(0,0,0,.08);
+    --radius: 14px;
+}
+
+/*=========================================
+    RESET
+=========================================*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--background);
+    font-family: 'Segoe UI',sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+/*=========================================
+    LAYOUT
+=========================================*/
+
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+/*=========================================
+    SIDEBAR
+=========================================*/
+
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--secondary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-shrink: 0;
+    transition: .35s;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+}
+
+    .sidebar::-webkit-scrollbar {
+        display: none; /* Chrome, Edge y Safari */
+    }
+/*=========================================
+    LOGO
+=========================================*/
+
+.logo {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 15px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+    .logo i {
+        font-size: 40px;
+        color: #ff5252;
+    }
+
+    .logo h4 {
+        margin: 0;
+        font-weight: 700;
+    }
+
+    .logo small {
+        color: #c7c7c7;
+    }
+
+/*=========================================
+    MENU
+=========================================*/
+
+.menu {
+    flex: 1;
+    padding: 20px 0;
+}
+
+.menu-title {
+    color: #9ca3af;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 18px 25px 8px;
+    letter-spacing: 1px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    text-decoration: none;
+    padding: 14px 25px;
+    transition: .25s;
+    font-size: 15px;
+}
+
+    .menu-link:hover {
+        background: rgba(255,255,255,.08);
+        color: white;
+    }
+
+    .menu-link i {
+        width: 22px;
+        text-align: center;
+    }
+
+.submenu {
+    display: block;
+    color: #d5d5d5;
+    text-decoration: none;
+    padding: 12px 65px;
+    transition: .25s;
+}
+
+    .submenu:hover {
+        background: rgba(255,255,255,.08);
+        color: white;
+    }
+
+/*=========================================
+    CONTENIDO DERECHO
+=========================================*/
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--background);
+}
+
+/*=========================================
+    TOPBAR
+=========================================*/
+
+/*=========================================
+    TOPBAR
+=========================================*/
+
+.topbar {
+    height: 75px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+/*=========================================
+    IZQUIERDA
+=========================================*/
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.system-info h4 {
+    margin: 0;
+    color: #b71c1c;
+    font-weight: 700;
+}
+
+.system-info small {
+    color: #6c757d;
+}
+
+/*=========================================
+    CENTRO
+=========================================*/
+
+.topbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.fecha-hora {
+    display: flex;
+    gap: 25px;
+}
+
+.top-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #374151;
+    font-weight: 500;
+}
+
+    .top-item i {
+        color: #b71c1c;
+        font-size: 18px;
+    }
+
+/*=========================================
+    DERECHA
+=========================================*/
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.btn-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+}
+
+    .btn-user img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #b71c1c;
+    }
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+    .user-info strong {
+        font-size: 15px;
+    }
+
+    .user-info small {
+        color: #6c757d;
+    }
+
+.btn-user i {
+    color: #666;
+}
+
+/*=========================================
+    FECHA Y HORA
+=========================================*/
+
+.fecha-hora{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:14px;
+
+    color:#6b7280;
+
+}
+.top-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+    .top-item i {
+        color: var(--primary);
+    }
+
+/*=========================================
+    BOTON MENU
+=========================================*/
+
+.btn-menu {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 12px;
+    background: var(--hover);
+    cursor: pointer;
+}
+
+    .btn-menu:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+/*=========================================
+    BUSCADOR
+=========================================*/
+
+.search-box {
+    width: 520px;
+    max-width: 100%;
+}
+
+    .search-box input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        margin-left: 10px;
+    }
+
+/*=========================================
+    BOTONES
+=========================================*/
+
+.btn-icon {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 12px;
+    background: #f4f6f9;
+    position: relative;
+    cursor: pointer;
+}
+
+.btn-icon {
+    transition: .3s;
+}
+
+    .btn-icon:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+.btn-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    transition: .3s;
+}
+
+    .btn-user:hover {
+        background: var(--hover);
+    }
+
+/*=========================================
+    CONTENIDO
+=========================================*/
+
+.contenido {
+    flex: 1;
+    overflow: auto;
+    padding: 30px;
+}
+
+/*=========================================
+    FOOTER
+=========================================*/
+
+.footer {
+    height: 55px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--border);
+}
+
+/*=========================================
+    SIDEBAR COLAPSADO
+=========================================*/
+
+.sidebar.collapsed {
+    width: 85px;
+}
+
+    .sidebar.collapsed .logo h4,
+    .sidebar.collapsed .logo small,
+    .sidebar.collapsed .menu-title,
+    .sidebar.collapsed .menu-link span,
+    .sidebar.collapsed .menu-link .bi-chevron-down,
+    .sidebar.collapsed .submenu {
+        display: none;
+    }
+
+    .sidebar.collapsed .logo {
+        justify-content: center;
+    }
+
+    .sidebar.collapsed .menu-link {
+        justify-content: center;
+    }
+
+@media(max-width:992px) {
+
+    .system-info small {
+        display: none;
+    }
+
+    .fecha-hora {
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+    }
+}
+
+@media(max-width:768px) {
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .topbar-center {
+        display: none;
+    }
+
+    .user-info {
+        display: none;
+    }
+}
+
+/*=========================================
+        USUARIO TOPBAR
+=========================================*/
+
+.btn-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    transition: .30s;
+}
+
+    .btn-user:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,.12);
+    }
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #b71c1c;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+    .user-info strong {
+        font-size: 15px;
+    }
+
+    .user-info small {
+        color: #6c757d;
+    }
+
+.dropdown-header {
+    padding: 15px;
+}

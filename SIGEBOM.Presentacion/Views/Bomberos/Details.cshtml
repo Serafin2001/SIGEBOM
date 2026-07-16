@@ -1,0 +1,154 @@
+﻿@model SIGEBOM.Datos.Models.Bombero
+
+@{
+    ViewData["Title"] = "Detalle del Bombero";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+
+                Detalle del Bombero
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th width="35%">Cédula</th>
+                            <td>@Model.Cedula</td>
+                        </tr>
+
+                        <tr>
+                            <th>Nombre</th>
+                            <td>@Model.Nombre</td>
+                        </tr>
+
+                        <tr>
+                            <th>Apellido</th>
+                            <td>@Model.Apellido</td>
+                        </tr>
+
+                        <tr>
+                            <th>Sexo</th>
+                            <td>@Model.Sexo</td>
+                        </tr>
+
+                        <tr>
+                            <th>Fecha Nacimiento</th>
+                            <td>@Model.FechaNacimiento.ToShortDateString()</td>
+                        </tr>
+
+                        <tr>
+                            <th>Tipo de Sangre</th>
+                            <td>@Model.TipoSangre</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th width="35%">Teléfono</th>
+                            <td>@Model.Telefono</td>
+                        </tr>
+
+                        <tr>
+                            <th>Correo</th>
+                            <td>@Model.Correo</td>
+                        </tr>
+
+                        <tr>
+                            <th>Dirección</th>
+                            <td>@Model.Direccion</td>
+                        </tr>
+
+                        <tr>
+                            <th>Fecha Ingreso</th>
+                            <td>@Model.FechaIngreso.ToShortDateString()</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rango</th>
+                            <td>@Model.Rango.NombreRango</td>
+                        </tr>
+
+                        <tr>
+                            <th>Cargo</th>
+                            <td>@(Model.Cargo?.NombreCargo ?? "Sin cargo")</td>
+                        </tr>
+
+                        <tr>
+                            <th>Estado</th>
+                            <td>
+
+                                @if (Model.Estado == "Activo")
+                                {
+                                    <span class="badge bg-success">
+
+                                        Activo
+
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+
+                                        Inactivo
+
+                                    </span>
+                                }
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.IdBombero"
+               class="btn btn-warning">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Editar
+
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Regresar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

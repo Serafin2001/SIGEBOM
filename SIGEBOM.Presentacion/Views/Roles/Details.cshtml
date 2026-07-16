@@ -1,0 +1,81 @@
+﻿@model SIGEBOM.Datos.Models.Rol
+
+@{
+    ViewData["Title"] = "Detalles del Rol";
+}
+
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+                Detalles del Rol
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    Nombre
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.NombreRol
+                </dd>
+
+                <dt class="col-sm-3">
+                    Estado
+                </dt>
+
+                <dd class="col-sm-9">
+
+                    @if (Model.Estado == "Activo")
+                    {
+                        <span class="badge bg-success">
+                            Activo
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+                            Inactivo
+                        </span>
+                    }
+
+                </dd>
+
+            </dl>
+
+            <div class="d-flex justify-content-between">
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Regresar
+
+                </a>
+
+                <a asp-action="Edit"
+                   asp-route-id="@Model.IdRol"
+                   class="btn btn-warning">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                    Editar
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,137 @@
+﻿@model SIGEBOM.Datos.Models.Turno
+
+@{
+    ViewData["Title"] = "Desactivar Turno";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                Desactivar Turno
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+
+                <i class="bi bi-exclamation-circle-fill"></i>
+
+                ¿Está seguro que desea desactivar este turno?
+
+                <br />
+
+                <small>
+                    El registro no será eliminado físicamente de la base de datos,
+                    únicamente cambiará su estado a <strong>Inactivo</strong>.
+                </small>
+
+            </div>
+
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    Nombre
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.NombreTurno
+                </dd>
+
+                <dt class="col-sm-3">
+                    Hora Entrada
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.HoraEntrada
+                </dd>
+
+                <dt class="col-sm-3">
+                    Hora Salida
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.HoraSalida
+                </dd>
+
+                <dt class="col-sm-3">
+                    Descripción
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.Descripcion
+                </dd>
+
+                <dt class="col-sm-3">
+                    Estado
+                </dt>
+
+                <dd class="col-sm-9">
+
+                    @if (Model.Estado == "Activo")
+                    {
+                        <span class="badge bg-success">
+
+                            Activo
+
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+
+                            Inactivo
+
+                        </span>
+                    }
+
+                </dd>
+
+            </dl>
+
+            <hr />
+
+            <form asp-action="Desactivar" method="post">
+
+                @Html.AntiForgeryToken()
+
+                <input asp-for="IdTurno" type="hidden" />
+
+                <div class="d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Cancelar
+
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+
+                        <i class="bi bi-trash"></i>
+
+                        Desactivar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

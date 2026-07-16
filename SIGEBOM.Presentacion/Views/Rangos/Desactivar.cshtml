@@ -1,0 +1,89 @@
+﻿@model SIGEBOM.Datos.Models.Rango
+
+@{
+    ViewData["Title"] = "Desactivar Rango";
+}
+
+<div class="container">
+
+    <div class="card shadow border-danger">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+                Desactivar Rango
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+
+                <strong>
+                    ¿Está seguro de desactivar este rango?
+                </strong>
+
+            </div>
+
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    Nombre
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.NombreRango
+                </dd>
+
+                <dt class="col-sm-3">
+                    Descripción
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.Descripcion
+                </dd>
+
+                <dt class="col-sm-3">
+                    Orden Jerárquico
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.OrdenJerarquico
+                </dd>
+
+            </dl>
+
+            <form asp-action="Desactivar">
+
+                <input type="hidden" asp-for="IdRango" />
+
+                <div class="d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Cancelar
+
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+
+                        <i class="bi bi-trash"></i>
+
+                        Desactivar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

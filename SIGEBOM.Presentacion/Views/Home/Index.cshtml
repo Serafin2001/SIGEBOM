@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="dashboard">
+    <div class="dashboard-header">
+
+        <div>
+
+            <h2>Bienvenido, Administrador</h2>
+
+            <p>
+                Sistema Integrado de Gestión del Cuerpo de Bomberos
+            </p>
+
+        </div>
+
+    </div>
+    <a asp-controller="Home" asp-action="Index" class="menu-link">
+        <i class="bi bi-speedometer2"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <h4 class="titulo-seccion mt-4">
+        Resumen General
+    </h4>
+
+    <div class="row g-4 mt-1">
+        <div class="col-xl-3 col-lg-6 col-md-6">
+
+            <div class="card-dashboard">
+
+                <div class="card-icon bg-danger">
+
+                    <i class="bi bi-person-badge-fill"></i>
+
+                </div>
+
+                <div class="card-info">
+
+                    <span>Total Bomberos</span>
+
+                    <h3>42</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6">
+
+            <div class="card-dashboard">
+
+                <div class="card-icon bg-primary">
+
+                    <i class="bi bi-truck"></i>
+
+                </div>
+
+                <div class="card-info">
+
+                    <span>Vehículos</span>
+
+                    <h3>10</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6">
+
+            <div class="card-dashboard">
+
+                <div class="card-icon bg-warning">
+
+                    <i class="bi bi-fire"></i>
+
+                </div>
+
+                <div class="card-info">
+
+                    <span>Incidentes</span>
+
+                    <h3>6</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6">
+
+            <div class="card-dashboard">
+
+                <div class="card-icon bg-success">
+
+                    <i class="bi bi-telephone-fill"></i>
+
+                </div>
+
+                <div class="card-info">
+
+                    <span>Llamadas</span>
+
+                    <h3>3</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

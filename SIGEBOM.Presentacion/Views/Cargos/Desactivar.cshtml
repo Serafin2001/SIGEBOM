@@ -1,0 +1,91 @@
+﻿@model SIGEBOM.Datos.Models.Cargo
+
+@{
+    ViewData["Title"] = "Desactivar Cargo";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+
+                Desactivar Cargo
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+
+                <h5>
+
+                    ¿Está seguro que desea desactivar este cargo?
+
+                </h5>
+
+                <p class="mb-0">
+
+                    El cargo permanecerá registrado en el sistema y no podrá asignarse a nuevos bomberos mientras esté inactivo.
+
+                </p>
+
+            </div>
+
+            <table class="table table-bordered">
+
+                <tr>
+
+                    <th width="25%">Nombre</th>
+
+                    <td>@Model.NombreCargo</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Descripción</th>
+
+                    <td>@Model.Descripcion</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="card-footer">
+
+            <form asp-action="Desactivar" method="post">
+
+                <input asp-for="IdCargo" type="hidden" />
+
+                <button type="submit"
+                        class="btn btn-danger">
+
+                    <i class="bi bi-person-x"></i>
+
+                    Desactivar
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Cancelar
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

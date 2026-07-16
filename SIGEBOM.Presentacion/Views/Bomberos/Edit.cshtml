@@ -1,0 +1,222 @@
+﻿@model SIGEBOM.Datos.Models.Bombero
+
+@{
+    ViewData["Title"] = "Editar Bombero";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning">
+
+            <h4 class="mb-0">
+
+                Editar Bombero
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit" method="post">
+
+                <input asp-for="IdBombero" type="hidden" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3"></div>
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="Cedula" class="form-label"></label>
+
+                        <input asp-for="Cedula" class="form-control" />
+
+                        <span asp-validation-for="Cedula" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="Nombre" class="form-label"></label>
+
+                        <input asp-for="Nombre" class="form-control" />
+
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="Apellido" class="form-label"></label>
+
+                        <input asp-for="Apellido" class="form-control" />
+
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3 mb-3">
+
+                        <label asp-for="Sexo" class="form-label"></label>
+
+                        <select asp-for="Sexo" class="form-select">
+
+                            <option value="">Seleccione...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label asp-for="FechaNacimiento" class="form-label"></label>
+
+                        <input asp-for="FechaNacimiento"
+                               type="date"
+                               class="form-control" />
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label asp-for="Telefono" class="form-label"></label>
+
+                        <input asp-for="Telefono" class="form-control" />
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label asp-for="TipoSangre" class="form-label"></label>
+
+                        <select asp-for="TipoSangre" class="form-select">
+
+                            <option value="">Seleccione...</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-8 mb-3">
+
+                        <label asp-for="Direccion" class="form-label"></label>
+
+                        <input asp-for="Direccion" class="form-control" />
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="Correo" class="form-label"></label>
+
+                        <input asp-for="Correo" class="form-control" />
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="FechaIngreso" class="form-label"></label>
+
+                        <input asp-for="FechaIngreso"
+                               type="date"
+                               class="form-control" />
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="IdRango" class="form-label">
+
+                            Rango
+
+                        </label>
+
+                        <select asp-for="IdRango"
+                                asp-items="ViewBag.IdRango"
+                                class="form-select">
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="IdCargo" class="form-label">
+
+                            Cargo
+
+                        </label>
+
+                        <select asp-for="IdCargo"
+                                asp-items="ViewBag.IdCargo"
+                                class="form-select">
+
+                            <option value="">Sin cargo</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Regresar
+
+                    </a>
+
+                    <button class="btn btn-warning">
+
+                        <i class="bi bi-save"></i>
+
+                        Guardar Cambios
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

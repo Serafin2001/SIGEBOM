@@ -1,0 +1,106 @@
+﻿@model SIGEBOM.Datos.Models.Bombero
+
+@{
+    ViewData["Title"] = "Desactivar Bombero";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+
+                Desactivar Bombero
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+
+                <h5>
+
+                    ¿Está seguro de que desea desactivar este bombero?
+
+                </h5>
+
+                <p class="mb-0">
+
+                    El registro permanecerá en la base de datos y podrá consultarse posteriormente.
+
+                </p>
+
+            </div>
+
+            <table class="table table-bordered">
+
+                <tr>
+
+                    <th width="30%">Cédula</th>
+
+                    <td>@Model.Cedula</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Nombre</th>
+
+                    <td>@Model.NombreCompleto</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Rango</th>
+
+                    <td>@Model.Rango.NombreRango</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Cargo</th>
+
+                    <td>@(Model.Cargo?.NombreCargo ?? "Sin cargo")</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="card-footer">
+
+            <form asp-action="Desactivar">
+
+                <input asp-for="IdBombero" type="hidden" />
+
+                <button class="btn btn-danger">
+
+                    <i class="bi bi-person-x"></i>
+
+                    Desactivar
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Cancelar
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

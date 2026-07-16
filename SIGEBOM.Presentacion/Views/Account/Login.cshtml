@@ -1,0 +1,206 @@
+﻿@model SIGEBOM.Negocio.ViewModels.LoginViewModel
+
+@{
+    Layout = "_LayoutLogin";
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="login-page">
+
+    <!--=========================================
+        PANEL IZQUIERDO
+    =========================================-->
+
+    <div class="login-left">
+
+        <div class="corner-shape"></div>
+
+        <div class="brand-content">
+
+            <img src="~/img/logo-bomberos.png"
+                 class="logo"
+                 alt="SIGEBOM" />
+
+            <h1>
+
+                SIGE<span>BOM</span>
+
+            </h1>
+
+            <h4>
+
+                Sistema Integrado de Gestión
+
+            </h4>
+
+            <p>
+
+                Plataforma para la administración integral
+                del Cuerpo de Bomberos.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!--=========================================
+        PANEL DERECHO
+    =========================================-->
+
+    <div class="login-right">
+
+        <div class="login-card">
+
+            <h2>
+
+                Iniciar sesión
+
+            </h2>
+
+            <p class="subtitulo">
+
+                Ingresa tus credenciales para acceder al sistema.
+
+            </p>
+
+            <form asp-action="Login"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly"
+                     class="alert alert-danger"></div>
+
+                <!--==========================
+                    Usuario
+                ==========================-->
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        Usuario
+
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+
+                            <i class="bi bi-person"></i>
+
+                        </span>
+
+                        <input asp-for="NombreUsuario"
+                               class="form-control"
+                               placeholder="Ingrese su usuario" />
+
+                    </div>
+
+                    <span asp-validation-for="NombreUsuario"
+                          class="text-danger"></span>
+
+                </div>
+
+                <!--==========================
+                    Contraseña
+                ==========================-->
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+
+                        Contraseña
+
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+
+                            <i class="bi bi-lock"></i>
+
+                        </span>
+
+                        <input asp-for="Contraseña"
+                               id="password"
+                               class="form-control"
+                               placeholder="Ingrese su contraseña" />
+
+                        <button class="btn btn-outline-secondary"
+                                id="mostrarPassword"
+                                type="button">
+
+                            <i class="bi bi-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                    <span asp-validation-for="Contraseña"
+                          class="text-danger"></span>
+
+                </div>
+
+                <!--==========================
+                    Recordarme
+                ==========================-->
+
+                <div class="login-options">
+
+                    <div class="form-check">
+
+                        <input asp-for="Recordarme"
+                               class="form-check-input" />
+
+                        <label asp-for="Recordarme"
+                               class="form-check-label">
+
+                            Recordarme
+
+                        </label>
+
+                    </div>
+
+                    <a href="#"
+                       class="forgot-password">
+
+                        ¿Olvidaste tu contraseña?
+
+                    </a>
+
+                </div>
+
+                <!--==========================
+                    Botón
+                ==========================-->
+
+                <button type="submit"
+                        class="btn btn-login">
+
+                    <i class="bi bi-box-arrow-in-right"></i>
+
+                    Ingresar
+
+                </button>
+
+            </form>
+
+            <div class="copyright">
+
+                © 2026 SIGEBOM | Sistema Integrado de Gestión del Cuerpo de Bomberos
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

@@ -1,0 +1,161 @@
+﻿@model SIGEBOM.Datos.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning">
+
+            <h4 class="mb-0">
+
+                Editar Usuario
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit">
+
+                <input asp-for="IdUsuario" type="hidden" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger"></div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+
+                            <label asp-for="NombreUsuario"
+                                   class="form-label"></label>
+
+                            <input asp-for="NombreUsuario"
+                                   class="form-control" />
+
+                            <span asp-validation-for="NombreUsuario"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+
+                            <label asp-for="IdRol"
+                                   class="form-label"></label>
+
+                            <select asp-for="IdRol"
+                                    asp-items="ViewBag.IdRol"
+                                    class="form-select">
+
+                                <option value="">Seleccione...</option>
+
+                            </select>
+
+                            <span asp-validation-for="IdRol"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+
+                          
+
+                            <small class="text-muted">
+
+                                Déjela vacía si no desea cambiarla.
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                </div>
+
+                <hr />
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Bombero
+
+                    </label>
+
+                    <div class="input-group">
+
+                        <input id="NombreBombero"
+                               value="@Model.Bombero.NombreCompleto"
+                               class="form-control"
+                               readonly />
+
+                        <input asp-for="IdBombero"
+                               id="IdBombero"
+                               type="hidden" />
+
+                        <button type="button"
+                                class="btn btn-danger"
+                                onclick="abrirModalBomberos('IdBombero','NombreBombero')">
+
+                            Buscar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        Regresar
+
+                    </a>
+
+                    <button class="btn btn-warning">
+
+                        Guardar Cambios
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<partial name="_ModalBomberos" />
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

@@ -1,0 +1,105 @@
+﻿@model SIGEBOM.Datos.Models.Cargo
+
+@{
+    ViewData["Title"] = "Detalle del Cargo";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+
+                Detalle del Cargo
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <tr>
+
+                    <th width="25%">ID</th>
+
+                    <td>@Model.IdCargo</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Nombre</th>
+
+                    <td>@Model.NombreCargo</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Descripción</th>
+
+                    <td>@Model.Descripcion</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Estado</th>
+
+                    <td>
+
+                        @if (Model.Estado == "Activo")
+                        {
+                            <span class="badge bg-success">
+
+                                Activo
+
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">
+
+                                Inactivo
+
+                            </span>
+                        }
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="card-footer">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.IdCargo"
+               class="btn btn-warning">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Editar
+
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Regresar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

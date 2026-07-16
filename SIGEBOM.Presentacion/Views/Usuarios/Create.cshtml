@@ -1,0 +1,178 @@
+﻿@model SIGEBOM.Datos.Models.Usuario
+
+@{
+    ViewData["Title"] = "Nuevo Usuario";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+
+                Registrar Usuario
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Create" method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3"></div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label asp-for="NombreUsuario"
+                               class="form-label"></label>
+
+                        <input asp-for="NombreUsuario"
+                               class="form-control"
+                               autocomplete="off" />
+
+                        <span asp-validation-for="NombreUsuario"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label asp-for="IdRol"
+                               class="form-label"></label>
+
+                        <select asp-for="IdRol"
+                                asp-items="ViewBag.IdRol"
+                                class="form-select">
+
+                            <option value="">Seleccione un rol...</option>
+
+                        </select>
+
+                        <span asp-validation-for="IdRol"
+                              class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label asp-for="Contraseña"
+                               class="form-label"></label>
+
+                        <input asp-for="Contraseña"
+                               type="password"
+                               class="form-control"
+                               autocomplete="new-password" />
+
+                        <span asp-validation-for="Contraseña"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label asp-for="ConfirmarContraseña"
+                               class="form-label"></label>
+
+                        <input asp-for="ConfirmarContraseña"
+                               type="password"
+                               class="form-control"
+                               autocomplete="new-password" />
+
+                        <span asp-validation-for="ConfirmarContraseña"
+                              class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Bombero
+
+                    </label>
+
+                    <div class="input-group">
+
+                        <input id="NombreBombero"
+                               class="form-control"
+                               placeholder="Seleccione un bombero..."
+                               readonly />
+
+                        <input asp-for="IdBombero"
+                               id="IdBombero"
+                               type="hidden" />
+
+                        <button type="button"
+                                class="btn btn-danger"
+                                onclick="abrirModalBomberos('IdBombero','NombreBombero')">
+
+                            <i class="bi bi-search"></i>
+
+                            Buscar
+
+                        </button>
+
+                    </div>
+
+                    <span asp-validation-for="IdBombero"
+                          class="text-danger"></span>
+
+                </div>
+
+                <hr />
+
+                <div class="d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Regresar
+
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-danger">
+
+                        <i class="bi bi-save"></i>
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<partial name="_ModalBomberos" />
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="~/js/bomberos.js"></script>
+
+}

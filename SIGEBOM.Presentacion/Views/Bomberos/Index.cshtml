@@ -1,0 +1,191 @@
+﻿@model IEnumerable<SIGEBOM.Datos.Models.Bombero>
+
+@{
+    ViewData["Title"] = "Bomberos";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h4 class="mb-0">
+
+                    Bomberos
+
+                </h4>
+
+                <a asp-action="Create"
+                   class="btn btn-light">
+
+                    <i class="bi bi-plus-circle"></i>
+
+                    Nuevo Bombero
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="get">
+
+                <div class="row mb-3">
+
+                    <div class="col-md-6">
+
+                        <div class="input-group">
+
+                            <input name="buscar"
+                                   value="@ViewData["Buscar"]"
+                                   class="form-control"
+                                   placeholder="Buscar por nombre, apellido o cédula..." />
+
+                            <button class="btn btn-danger">
+
+                                <i class="bi bi-search"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <table class="table table-hover table-bordered align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cédula</th>
+
+                        <th>Rango</th>
+
+                        
+
+                        <th>Cargo</th>
+
+                        <th>Estado</th>
+
+                        <th width="220">Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @if (Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+
+                                    @item.Cedula
+
+                                </td>
+
+                                <td>
+
+                                    @item.Rango.NombreRango
+
+                                </td>
+
+                                <td>
+
+                                    @item.NombreCompleto
+
+                                </td>
+
+                                <td>
+
+                                    @(item.Cargo?.NombreCargo ?? "Sin cargo")
+
+                                </td>
+
+                                <td>
+
+                                    @if (item.Estado == "Activo")
+                                    {
+                                        <span class="badge bg-success">
+
+                                            Activo
+
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+
+                                            Inactivo
+
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <td>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.IdBombero"
+                                       class="btn btn-warning btn-sm">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.IdBombero"
+                                       class="btn btn-info btn-sm">
+
+                                        <i class="bi bi-eye"></i>
+
+                                    </a>
+
+                                    <a asp-action="Desactivar"
+                                       asp-route-id="@item.IdBombero"
+                                       class="btn btn-danger btn-sm">
+
+                                       <i class="bi bi-person-x"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+
+                            <td colspan="6"
+                                class="text-center">
+
+                                No existen registros.
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

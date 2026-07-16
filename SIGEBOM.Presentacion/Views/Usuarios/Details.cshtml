@@ -1,0 +1,107 @@
+﻿@model SIGEBOM.Datos.Models.Usuario
+
+@{
+    ViewData["Title"] = "Detalle del Usuario";
+}
+
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+
+                Detalle del Usuario
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    Usuario
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.NombreUsuario
+                </dd>
+
+                <dt class="col-sm-3">
+                    Bombero
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.Bombero.NombreCompleto
+                </dd>
+
+                <dt class="col-sm-3">
+                    Rango
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.Bombero.Rango.NombreRango
+                </dd>
+
+                <dt class="col-sm-3">
+                    Rol
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.Rol.NombreRol
+                </dd>
+
+                <dt class="col-sm-3">
+                    Estado
+                </dt>
+
+                <dd class="col-sm-9">
+
+                    @if (Model.Estado == "Activo")
+                    {
+                        <span class="badge bg-success">
+
+                            Activo
+
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+
+                            Inactivo
+
+                        </span>
+                    }
+
+                </dd>
+
+            </dl>
+
+        </div>
+
+        <div class="card-footer">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.IdUsuario"
+               class="btn btn-warning">
+
+                Editar
+
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Regresar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

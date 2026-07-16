@@ -1,0 +1,403 @@
+﻿/*==================================================
+    CRUD GENERAL
+==================================================*/
+
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #ececec;
+}
+
+    .card-header h3,
+    .card-header h4 {
+        margin: 0;
+        font-weight: 700;
+    }
+
+.card-body {
+    padding: 25px;
+}
+
+.card-footer {
+    padding: 20px 25px;
+    background: #fff;
+    border-top: 1px solid #ececec;
+}
+
+/*==================================================
+    FORMULARIOS
+==================================================*/
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: .45rem;
+}
+
+.form-control,
+.form-select,
+.form-control:focus,
+.form-select:focus {
+    border-radius: 10px;
+}
+
+.form-control,
+.form-select {
+    min-height: 45px;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 .15rem rgba(183, 28, 28, .15);
+    }
+
+textarea.form-control {
+    min-height: 120px;
+}
+
+::placeholder {
+    color: #9e9e9e !important;
+}
+
+/*==================================================
+    VALIDACIONES
+==================================================*/
+
+.field-validation-error {
+    font-size: 13px;
+    color: #dc3545;
+}
+
+.validation-summary-errors {
+    margin-bottom: 15px;
+}
+
+.input-validation-error {
+    border-color: #dc3545 !important;
+}
+
+/*==================================================
+    TABLAS
+==================================================*/
+
+.table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-responsive {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background: var(--primary);
+    color: #fff !important;
+    font-weight: 600;
+    border: none;
+    padding: 14px 16px;
+    vertical-align: middle;
+}
+
+.table tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border-color: #ececec;
+}
+
+.table tbody tr {
+    transition: all .25s ease;
+}
+
+    .table tbody tr:hover {
+        background: #f8f9fa;
+    }
+
+.table td,
+.table th {
+    white-space: nowrap;
+}
+
+/*==================================================
+    BOTONES
+==================================================*/
+
+.btn {
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all .25s ease;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn + .btn {
+        margin-left: 5px;
+    }
+
+.btn-sm {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-info,
+.btn-warning,
+.btn-danger,
+.btn-primary,
+.btn-success {
+    color: #fff;
+}
+
+/*==================================================
+    BADGES
+==================================================*/
+
+.badge {
+    font-size: 13px;
+    padding: 8px 14px;
+    font-weight: 500;
+}
+
+/*==================================================
+    ALERTAS
+==================================================*/
+
+.alert {
+    border-radius: 12px;
+}
+
+/*==================================================
+    INPUT GROUP
+==================================================*/
+
+.input-group .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/*==================================================
+    MODALES
+==================================================*/
+/*==================================================
+    MODAL DE BÚSQUEDA
+==================================================*/
+
+.modal-xl {
+    max-width: 1200px;
+}
+
+.modal-bomberos {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(0,0,0,.25);
+}
+
+    /*==================================================
+    CABECERA
+==================================================*/
+
+    .modal-bomberos .modal-header {
+        background: linear-gradient(135deg,#b71c1c,#8c1111);
+        color: #fff;
+        border: none;
+        padding: 22px 28px;
+    }
+
+    .modal-bomberos h4 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .modal-bomberos small {
+        color: rgba(255,255,255,.90);
+        font-size: 15px;
+    }
+
+    .modal-bomberos .modal-body {
+        padding: 30px;
+        background: #fafafa;
+    }
+
+/*==================================================
+    BUSCADOR
+==================================================*/
+
+.buscador-modal {
+    margin-bottom: 25px;
+}
+
+    .buscador-modal .input-group {
+        box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    }
+
+    .buscador-modal .input-group-text {
+        background: #fff;
+        border-right: none;
+        border-radius: 12px 0 0 12px;
+    }
+
+    .buscador-modal input {
+        border-left: none;
+        border-radius: 0 12px 12px 0;
+        height: 48px;
+        font-size: 15px;
+    }
+
+        .buscador-modal input:focus {
+            box-shadow: none;
+        }
+
+/*==================================================
+    TABLA
+==================================================*/
+
+.tabla-modal {
+    max-height: 450px;
+    overflow-y: auto;
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+    .tabla-modal table {
+        width: 100%;
+        margin-bottom: 0;
+        background: #fff;
+    }
+
+    .tabla-modal thead th {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #b71c1c;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 8px 10px;
+        border: none;
+    }
+    .tabla-modal tbody td {
+        padding: 8px 10px;
+        font-size: 14px;
+        vertical-align: middle;
+    }
+
+    .tabla-modal tbody tr {
+        transition: .25s;
+    }
+
+        .tabla-modal tbody tr:hover {
+            background: #fff5f5;
+        }
+
+/*==================================================
+    BOTÓN SELECCIONAR
+==================================================*/
+
+.seleccionarBombero {
+    min-width: 85px;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+    .seleccionarBombero:hover {
+        transform: scale(1.05);
+    }
+
+/*==================================================
+    SCROLL
+==================================================*/
+
+.tabla-modal::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.tabla-modal::-webkit-scrollbar-track {
+    background: #f3f3f3;
+}
+
+.tabla-modal::-webkit-scrollbar-thumb {
+    background: #b71c1c;
+    border-radius: 20px;
+}
+
+    .tabla-modal::-webkit-scrollbar-thumb:hover {
+        background: #8c1111;
+    }
+
+/*==================================================
+    ANIMACIÓN
+==================================================*/
+
+.modal.fade .modal-dialog {
+    transform: scale(.92);
+    transition: all .25s ease;
+}
+
+.modal.show .modal-dialog {
+    transform: scale(1);
+}
+
+/*==================================================
+    RESPONSIVE
+==================================================*/
+
+@media(max-width:992px) {
+
+    .modal-xl{
+    max-width:750px;
+}
+}
+
+@media(max-width:768px) {
+
+    .modal-bomberos .modal-body {
+        padding: 20px;
+    }
+
+    .modal-bomberos h4 {
+        font-size: 24px;
+    }
+
+    .tabla-modal {
+        max-height: 320px;
+    }
+
+    .buscador-modal input {
+        font-size: 14px;
+    }
+}
+/*==================================================
+    UTILIDADES
+==================================================*/
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-required::after {
+    content: " *";
+    color: #dc3545;
+}
+
+hr {
+    margin: 1.5rem 0;
+}
+
+.mb-3:last-child {
+    margin-bottom: 0 !important;
+}

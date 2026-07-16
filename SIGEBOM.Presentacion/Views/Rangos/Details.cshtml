@@ -1,0 +1,97 @@
+﻿@model SIGEBOM.Datos.Models.Rango
+
+@{
+    ViewData["Title"] = "Detalles del Rango";
+}
+
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+                Detalles del Rango
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    Nombre
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.NombreRango
+                </dd>
+
+                <dt class="col-sm-3">
+                    Descripción
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.Descripcion
+                </dd>
+
+                <dt class="col-sm-3">
+                    Orden Jerárquico
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Model.OrdenJerarquico
+                </dd>
+
+                <dt class="col-sm-3">
+                    Estado
+                </dt>
+
+                <dd class="col-sm-9">
+
+                    @if (Model.Estado == "Activo")
+                    {
+                        <span class="badge bg-success">
+                            Activo
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">
+                            Inactivo
+                        </span>
+                    }
+
+                </dd>
+
+            </dl>
+
+            <div class="d-flex justify-content-between">
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Regresar
+
+                </a>
+
+                <a asp-action="Edit"
+                   asp-route-id="@Model.IdRango"
+                   class="btn btn-warning">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                    Editar
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

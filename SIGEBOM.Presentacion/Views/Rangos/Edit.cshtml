@@ -1,0 +1,108 @@
+﻿@model SIGEBOM.Datos.Models.Rango
+
+@{
+    ViewData["Title"] = "Editar Rango";
+}
+
+<div class="container">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning text-dark">
+
+            <h4 class="mb-0">
+                Editar Rango
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit">
+
+                <input type="hidden" asp-for="IdRango" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+
+                    <label asp-for="NombreRango" class="form-label"></label>
+
+                    <input asp-for="NombreRango"
+                           class="form-control"
+                           placeholder="Nombre del rango" />
+
+                    <span asp-validation-for="NombreRango" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Descripcion" class="form-label"></label>
+
+                    <textarea asp-for="Descripcion"
+                              class="form-control"
+                              rows="3"></textarea>
+
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="OrdenJerarquico" class="form-label"></label>
+
+                    <input asp-for="OrdenJerarquico"
+                           class="form-control"
+                           min="1" />
+
+                    <span asp-validation-for="OrdenJerarquico" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Estado" class="form-label"></label>
+
+                    <input asp-for="Estado"
+                           class="form-control"
+                           readonly />
+
+                </div>
+
+                <div class="d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Regresar
+
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-warning">
+
+                        <i class="bi bi-save"></i>
+
+                        Actualizar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

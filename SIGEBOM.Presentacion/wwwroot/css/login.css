@@ -1,0 +1,286 @@
+﻿/*=========================================================
+    LOGIN SIGEBOM
+=========================================================*/
+
+:root {
+    --primary: #c1121f;
+    --primary-dark: #8b0d17;
+    --background: #f4f6fa;
+    --text: #1f2937;
+    --border: #e5e7eb;
+}
+
+/*=========================================================
+    GENERAL
+=========================================================*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: var(--background);
+    overflow: hidden;
+}
+
+/*=========================================================
+    PANTALLA
+=========================================================*/
+
+.login-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+/*=========================================================
+    PANEL IZQUIERDO
+=========================================================*/
+
+.login-left {
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(rgba(255,255,255,.90), rgba(255,255,255,.90)), url("../img/fondo-login.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Curva Roja */
+
+.corner-shape {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(135deg,#d90429,#8d0801);
+    border-bottom-right-radius: 220px;
+}
+
+/* Contenido */
+
+.brand-content {
+    text-align: center;
+    width: 80%;
+    z-index: 10;
+}
+
+.logo {
+    width: 230px;
+    margin-bottom: 35px;
+    transition: .4s;
+}
+
+    .logo:hover {
+        transform: scale(1.05);
+    }
+
+.brand-content h1 {
+    font-size: 72px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.brand-content span {
+    color: var(--primary);
+}
+
+.brand-content h4 {
+    margin-top: 25px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.brand-content p {
+    margin-top: 20px;
+    color: #6b7280;
+    font-size: 22px;
+    line-height: 1.7;
+}
+
+/*=========================================================
+    PANEL DERECHO
+=========================================================*/
+
+.login-right {
+    width: 50%;
+    background: #f5f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*=========================================================
+    TARJETA
+=========================================================*/
+
+.login-card {
+    width: 520px;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(8px);
+    border-radius: 25px;
+    padding: 60px;
+    box-shadow: 0 25px 70px rgba(0,0,0,.12);
+    border: 1px solid rgba(255,255,255,.60);
+    animation: aparecer .7s ease;
+}
+
+    .login-card h2 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #1f2937;
+        text-align: center;
+    }
+
+.subtitulo {
+    text-align: center;
+    color: #6b7280;
+    margin-top: 12px;
+    margin-bottom: 40px;
+    font-size: 20px;
+}
+
+/*=========================================================
+    INPUTS
+=========================================================*/
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group-text {
+    background: white;
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    padding: 18px;
+}
+
+.form-control {
+    border-left: none;
+    border-right: none;
+    height: 58px;
+    font-size: 17px;
+}
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #ced4da;
+    }
+
+#mostrarPassword {
+    background: white;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+}
+
+/*=========================================================
+    OPCIONES
+=========================================================*/
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0;
+}
+
+.forgot-password {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+    .forgot-password:hover {
+        color: var(--primary-dark);
+    }
+
+/*=========================================================
+    BOTON
+=========================================================*/
+
+.btn-login {
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(135deg,#d90429,#9d0208);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    transition: .30s;
+}
+
+    .btn-login:hover {
+        background: linear-gradient(135deg,#9d0208,#6a040f);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(157,2,8,.30);
+        color: white;
+    }
+
+/*=========================================================
+    COPYRIGHT
+=========================================================*/
+
+.copyright {
+    text-align: center;
+    margin-top: 40px;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+/*=========================================================
+    ANIMACION
+=========================================================*/
+
+
+
+@keyframes aparecer {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/*=========================================================
+    RESPONSIVE
+=========================================================*/
+
+@media(max-width:992px) {
+
+    .login-left {
+        display: none;
+    }
+
+    .login-right {
+        width: 100%;
+    }
+
+    .login-card {
+        width: 90%;
+        padding: 40px;
+    }
+
+        .login-card h2 {
+            font-size: 36px;
+        }
+}
