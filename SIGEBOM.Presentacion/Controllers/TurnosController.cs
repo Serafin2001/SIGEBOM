@@ -5,7 +5,7 @@ using SIGEBOM.Negocio.Interfaces;
 
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador,Oficial")]
     public class TurnosController : Controller
     {
         private readonly ITurnoService _turnoService;
@@ -32,15 +32,14 @@ namespace SIGEBOM.Presentacion.Controllers
         // DETAILS
         //=========================================
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-                return NotFound();
-
-            var turno = await _turnoService.ObtenerPorId(id.Value);
+            var turno = await _turnoService.ObtenerPorId(id);
 
             if (turno == null)
+            {
                 return NotFound();
+            }
 
             return View(turno);
         }
@@ -85,15 +84,14 @@ namespace SIGEBOM.Presentacion.Controllers
         // EDIT GET
         //=========================================
 
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-                return NotFound();
-
-            var turno = await _turnoService.ObtenerPorId(id.Value);
+            var turno = await _turnoService.ObtenerPorId(id);
 
             if (turno == null)
+            {
                 return NotFound();
+            }
 
             return View(turno);
         }
@@ -104,11 +102,8 @@ namespace SIGEBOM.Presentacion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Turno turno)
+        public async Task<IActionResult> Edit(Turno turno)
         {
-            if (id != turno.IdTurno)
-                return NotFound();
-
             if (!ModelState.IsValid)
             {
                 return View(turno);
@@ -128,30 +123,10 @@ namespace SIGEBOM.Presentacion.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //=========================================
-        // DESACTIVAR GET
-        //=========================================
-
-        public async Task<IActionResult> Desactivar(int? id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var turno = await _turnoService.ObtenerPorId(id.Value);
-
-            if (turno == null)
-                return NotFound();
-
-            return View(turno);
-        }
-
-        //=========================================
-        // DESACTIVAR POST
-        //=========================================
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Desactivar(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var resultado = await _turnoService.Desactivar(id);
 

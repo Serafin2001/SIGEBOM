@@ -24,6 +24,9 @@ builder.Services.AddScoped<IBomberoService, BomberoService>();
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITurnoService, TurnoService>();
+builder.Services.AddScoped<IProgramacionTurnoService, ProgramacionTurnoService>();
+
+
 //=========================================
 // AUTENTICACIÓN
 //=========================================
@@ -60,7 +63,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

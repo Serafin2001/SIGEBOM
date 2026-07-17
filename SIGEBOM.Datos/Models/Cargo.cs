@@ -14,9 +14,8 @@ namespace SIGEBOM.Datos.Models
         [StringLength(255)]
         public string? Descripcion { get; set; }
 
-        [Required(ErrorMessage = "El estado es obligatorio.")]
         [StringLength(10)]
-        public string Estado { get; set; } = string.Empty;
+        public string Estado { get; set; } = "Activo";
 
         // Relación: Un cargo puede tener muchos bomberos
         public ICollection<Bombero> Bomberos { get; set; } = new List<Bombero>();

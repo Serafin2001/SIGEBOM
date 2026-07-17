@@ -3,54 +3,63 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SIGEBOM.Datos.Models;
 using SIGEBOM.Negocio.Interfaces;
+using SIGEBOM.Negocio.Services;
 using SIGEBOM.Negocio.ViewModels;
+using System.Security.Claims;
 
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador,Oficial")]
     public class ProgramacionesTurnosController : Controller
     {
-        private readonly IProgramacionTurnoService _programacionService;
+
+        private readonly IProgramacionTurnoService _programacionTurnoService;
         private readonly ITurnoService _turnoService;
         private readonly IBomberoService _bomberoService;
 
         public ProgramacionesTurnosController(
-            IProgramacionTurnoService programacionService,
+            IProgramacionTurnoService programacionTurnoService,
             ITurnoService turnoService,
             IBomberoService bomberoService)
         {
-            _programacionService = programacionService;
+            _programacionTurnoService = programacionTurnoService;
             _turnoService = turnoService;
             _bomberoService = bomberoService;
         }
-
-        //=========================================
-        // INDEX
-        //=========================================
-
-        public async Task<IActionResult> Index(DateTime? fecha)
+        public async Task<IActionResult> Index(DateOnly? fecha)
         {
-            var lista = await _programacionService.ObtenerTodos(fecha);
+            var lista = await _programacionTurnoService.ObtenerTodos(fecha);
 
             ViewBag.Fecha = fecha;
 
             return View(lista);
         }
 
-        //=========================================
-        // CREATE GET
-        //=========================================
+
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var programacion = await _programacionTurnoService.ObtenerPorId(id);
+
+            if (programacion == null)
+                return NotFound();
+
+            return View(programacion);
+        }
+
 
         public async Task<IActionResult> Create()
         {
-            await CargarTurnos();
+            var modelo = new ProgramacionTurnoViewModel
+            {
+                Fecha = DateOnly.FromDateTime(DateTime.Today)
+            };
 
-            return View();
+            await CargarCombos(modelo);
+
+            return View(modelo);
         }
 
-        //=========================================
-        // CREATE POST
-        //=========================================
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -58,18 +67,31 @@ namespace SIGEBOM.Presentacion.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await CargarTurnos();
+                await CargarCombos(modelo);
+                return View(modelo);
+            }
+
+            var idUsuarioClaim = User.FindFirst("IdUsuario");
+
+            if (idUsuarioClaim == null)
+            {
+                ModelState.AddModelError("", "No fue posible identificar el usuario autenticado.");
+                await CargarCombos(modelo);
                 return View(modelo);
             }
 
             var programacion = new ProgramacionTurno
             {
-               
+                Fecha = modelo.Fecha,
                 IdTurno = modelo.IdTurno,
-                IdEncargado = modelo.IdEncargado
+                IdEncargado = modelo.IdEncargado,
+                Observacion = modelo.Observacion,
+                Estado = "Programado",
+                FechaCreacion = DateTime.Now,
+                IdUsuarioCreador = int.Parse(idUsuarioClaim.Value)
             };
 
-            var resultado = await _programacionService.Crear(
+            var resultado = await _programacionTurnoService.Crear(
                 programacion,
                 modelo.BomberosSeleccionados);
 
@@ -77,7 +99,7 @@ namespace SIGEBOM.Presentacion.Controllers
             {
                 ModelState.AddModelError("", resultado.Mensaje);
 
-                await CargarTurnos();
+                await CargarCombos(modelo);
 
                 return View(modelo);
             }
@@ -87,18 +109,72 @@ namespace SIGEBOM.Presentacion.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //=========================================
-        // MÉTODO PRIVADO
-        //=========================================
-
-        private async Task CargarTurnos()
+        public async Task<IActionResult> Edit(int id)
         {
-            var turnos = await _turnoService.ObtenerTodos(null);
+            var vm = await _programacionTurnoService.ObtenerViewModelEditar(id);
 
-            ViewBag.IdTurno = new SelectList(
-                turnos,
-                "IdTurno",
-                "NombreTurno");
+            if (vm == null)
+                return NotFound();
+
+            return View(vm);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ProgramacionTurnoViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                await CargarCombos(vm);
+                return View(vm);
+            }
+
+            var programacion = new ProgramacionTurno
+            {
+                IdProgramacionTurno = vm.IdProgramacionTurno,
+                Fecha = vm.Fecha,
+                IdTurno = vm.IdTurno,
+                IdEncargado = vm.IdEncargado,
+                Observacion = vm.Observacion
+            };
+
+            var resultado = await _programacionTurnoService.Actualizar(
+                programacion,
+                vm.BomberosSeleccionados);
+
+            if (!resultado.Exitoso)
+            {
+                ModelState.AddModelError("", resultado.Mensaje);
+
+                await CargarCombos(vm);
+
+                return View(vm);
+            }
+
+            TempData["Success"] = resultado.Mensaje;
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var resultado = await _programacionTurnoService.Desactivar(id);
+
+            TempData["Success"] = resultado.Mensaje;
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        private async Task CargarCombos(ProgramacionTurnoViewModel modelo)
+        {
+            modelo.Turnos = await _turnoService.ObtenerTodos(null);
         }
     }
 }

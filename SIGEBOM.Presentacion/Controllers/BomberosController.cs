@@ -23,9 +23,7 @@ namespace SIGEBOM.Presentacion.Controllers
             _rangoService = rangoService;
         }
 
-        //=========================================
-        // INDEX
-        //=========================================
+
 
         public async Task<IActionResult> Index(string? buscar)
         {
@@ -36,9 +34,7 @@ namespace SIGEBOM.Presentacion.Controllers
             return View(bomberos);
         }
 
-        //=========================================
-        // DETAILS
-        //=========================================
+
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,9 +49,7 @@ namespace SIGEBOM.Presentacion.Controllers
             return View(bombero);
         }
 
-        //=========================================
-        // CREATE GET
-        //=========================================
+
 
         public async Task<IActionResult> Create()
         {
@@ -64,9 +58,6 @@ namespace SIGEBOM.Presentacion.Controllers
             return View();
         }
 
-        //=========================================
-        // CREATE POST
-        //=========================================
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -98,9 +89,7 @@ namespace SIGEBOM.Presentacion.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //=========================================
-        // EDIT GET
-        //=========================================
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -117,9 +106,6 @@ namespace SIGEBOM.Presentacion.Controllers
             return View(bombero);
         }
 
-        //=========================================
-        // EDIT POST
-        //=========================================
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -154,9 +140,7 @@ namespace SIGEBOM.Presentacion.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //=========================================
-        // DESACTIVAR GET
-        //=========================================
+
 
         public async Task<IActionResult> Desactivar(int? id)
         {
@@ -171,9 +155,7 @@ namespace SIGEBOM.Presentacion.Controllers
             return View(bombero);
         }
 
-        //=========================================
-        // DESACTIVAR POST
-        //=========================================
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -186,10 +168,6 @@ namespace SIGEBOM.Presentacion.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //=========================================
-        // CARGAR COMBOS
-        //=========================================
-
         private async Task CargarCombos()
         {
             var cargos = await _cargoService.ObtenerTodos(null);
@@ -198,6 +176,28 @@ namespace SIGEBOM.Presentacion.Controllers
             ViewBag.IdCargo = new SelectList(cargos, "IdCargo", "NombreCargo");
 
             ViewBag.IdRango = new SelectList(rangos, "IdRango", "NombreRango");
+        }
+
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> Buscar(string? buscar)
+        {
+            var bomberos = await _bomberoService.ObtenerTodos(buscar);
+
+            var resultado = bomberos
+                .Where(b => b.Estado == "Activo")
+                .Select(b => new
+                {
+                    id = b.IdBombero,
+                    cedula = b.Cedula,
+                    nombre = b.NombreCompleto,
+                    cargo = b.Cargo != null ? b.Cargo.NombreCargo : "Sin cargo"
+                })
+                .ToList();
+
+            return Json(resultado);
         }
     }
 }

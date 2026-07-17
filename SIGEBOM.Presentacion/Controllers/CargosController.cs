@@ -63,7 +63,19 @@ namespace SIGEBOM.Presentacion.Controllers
         public async Task<IActionResult> Create(Cargo cargo)
         {
             if (!ModelState.IsValid)
+            {
+                foreach (var error in ModelState)
+                {
+                    Console.WriteLine($"{error.Key}");
+
+                    foreach (var e in error.Value.Errors)
+                    {
+                        Console.WriteLine(e.ErrorMessage);
+                    }
+                }
+
                 return View(cargo);
+            }
 
             var resultado = await _cargoService.Crear(cargo);
 

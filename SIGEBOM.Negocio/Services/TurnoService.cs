@@ -22,16 +22,13 @@ namespace SIGEBOM.Negocio.Services
         public async Task<List<Turno>> ObtenerTodos(string? buscar)
         {
             var consulta = _context.Turnos
-                .Where(t => t.Estado != "Inactivo")
+                .Where(t => t.Estado == "Activo")
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(buscar))
             {
-                buscar = buscar.Trim();
-
                 consulta = consulta.Where(t =>
-                    EF.Functions.Like(t.NombreTurno, $"%{buscar}%") ||
-                    EF.Functions.Like(t.Descripcion!, $"%{buscar}%"));
+                    t.NombreTurno.Contains(buscar));
             }
 
             return await consulta
@@ -50,13 +47,23 @@ namespace SIGEBOM.Negocio.Services
         }
 
         //=========================================
+        // EXISTE NOMBRE
+        //=========================================
+
+        public async Task<bool> ExisteNombre(string nombre)
+        {
+            return await _context.Turnos
+                .AnyAsync(t =>
+                    t.NombreTurno == nombre &&
+                    t.Estado == "Activo");
+        }
+
+        //=========================================
         // CREAR
         //=========================================
 
         public async Task<ResultadoOperacion> Crear(Turno turno)
         {
-            turno.NombreTurno = turno.NombreTurno.Trim();
-
             if (await ExisteNombre(turno.NombreTurno))
             {
                 return new ResultadoOperacion
@@ -98,19 +105,20 @@ namespace SIGEBOM.Negocio.Services
             }
 
             bool existe = await _context.Turnos.AnyAsync(t =>
+                t.IdTurno != turno.IdTurno &&
                 t.NombreTurno == turno.NombreTurno &&
-                t.IdTurno != turno.IdTurno);
+                t.Estado == "Activo");
 
             if (existe)
             {
                 return new ResultadoOperacion
                 {
                     Exitoso = false,
-                    Mensaje = "Ya existe un turno con ese nombre."
+                    Mensaje = "Ya existe otro turno con ese nombre."
                 };
             }
 
-            turnoBD.NombreTurno = turno.NombreTurno.Trim();
+            turnoBD.NombreTurno = turno.NombreTurno;
             turnoBD.HoraEntrada = turno.HoraEntrada;
             turnoBD.HoraSalida = turno.HoraSalida;
             turnoBD.Descripcion = turno.Descripcion;
@@ -155,18 +163,6 @@ namespace SIGEBOM.Negocio.Services
                 Exitoso = true,
                 Mensaje = "Turno desactivado correctamente."
             };
-        }
-
-        //=========================================
-        // EXISTE NOMBRE
-        //=========================================
-
-        public async Task<bool> ExisteNombre(string nombre)
-        {
-            nombre = nombre.Trim();
-
-            return await _context.Turnos
-                .AnyAsync(t => t.NombreTurno == nombre);
         }
     }
 }

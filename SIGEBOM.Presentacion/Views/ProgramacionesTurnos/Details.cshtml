@@ -1,0 +1,222 @@
+﻿@model SIGEBOM.Datos.Models.ProgramacionTurno
+
+@{
+    ViewData["Title"] = "Detalle de la Programación";
+}
+
+<div class="crud-container">
+
+    <div class="crud-header">
+
+        <div>
+
+            <h2>
+                Detalle de la Programación
+            </h2>
+
+            <p>
+                Información completa de la programación del turno.
+            </p>
+
+        </div>
+
+        <a asp-action="Index" class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left-circle"></i>
+
+            Regresar
+
+        </a>
+
+    </div>
+
+    <div class="crud-card">
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+
+                <label class="form-label fw-bold">
+                    Fecha
+                </label>
+
+                <input class="form-control"
+                       value="@Model.Fecha.ToString("dd/MM/yyyy")"
+                       readonly />
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <label class="form-label fw-bold">
+                    Turno
+                </label>
+
+                <input class="form-control"
+                       value="@Model.Turno.NombreTurno"
+                       readonly />
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <label class="form-label fw-bold">
+                    Estado
+                </label>
+
+                <input class="form-control"
+                       value="@Model.Estado"
+                       readonly />
+
+            </div>
+
+        </div>
+
+        <hr />
+
+        <div class="row">
+
+            <div class="col-md-3 mb-3">
+
+                <label class="form-label fw-bold">
+                    Cédula Encargado
+                </label>
+
+                <input class="form-control"
+                       value="@Model.Encargado.Cedula"
+                       readonly />
+
+            </div>
+
+            <div class="col-md-9 mb-3">
+
+                <label class="form-label fw-bold">
+                    Encargado
+                </label>
+
+                <input class="form-control"
+                       value="@Model.Encargado.NombreCompleto"
+                       readonly />
+
+            </div>
+
+        </div>
+
+        <hr />
+
+        <h5 class="mb-3">
+
+            Bomberos Asignados
+
+        </h5>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>Cédula</th>
+
+                        <th>Nombre</th>
+
+                        <th>Estado</th>
+
+                        <th>Observación</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model.DetallesProgramacion)
+                    {
+                        <tr>
+
+                            <td>
+
+                                @item.Bombero.Cedula
+
+                            </td>
+
+                            <td>
+
+                                @item.Bombero.NombreCompleto
+
+                            </td>
+
+                            <td>
+
+                                @item.Estado
+
+                            </td>
+
+                            <td>
+
+                                @item.Observacion
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <hr />
+
+        <div class="mb-3">
+
+            <label class="form-label fw-bold">
+
+                Observación
+
+            </label>
+
+            <textarea class="form-control"
+                      rows="4"
+                      readonly>@Model.Observacion</textarea>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <label class="form-label fw-bold">
+
+                    Fecha de Creación
+
+                </label>
+
+                <input class="form-control"
+                       value="@Model.FechaCreacion.ToString("dd/MM/yyyy HH:mm")"
+                       readonly />
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label class="form-label fw-bold">
+
+                    Registrado por
+
+                </label>
+
+                <input class="form-control"
+                       value="@Model.UsuarioCreador.NombreUsuario"
+                       readonly />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

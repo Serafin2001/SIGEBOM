@@ -1,88 +1,59 @@
 ﻿@model SIGEBOM.Datos.Models.Turno
 
 @{
-    ViewData["Title"] = "Detalles del Turno";
+    ViewData["Title"] = "Detalle del Turno";
 }
 
-<div class="container-fluid">
+<div class="crud-container">
 
-    <div class="card shadow">
 
-        <div class="card-header bg-info text-white">
 
-            <h4 class="mb-0">
+    <div class="crud-header">
 
-                <i class="bi bi-eye"></i>
+        <div>
 
-                Detalles del Turno
+            <h2>
 
-            </h4>
+                Detalle del Turno
+
+            </h2>
+
+            <p>
+
+                Información completa del turno seleccionado.
+
+            </p>
 
         </div>
 
-        <div class="card-body">
+    </div>
 
-            <div class="row">
 
-                <div class="col-md-6 mb-4">
+    <div class="crud-card">
 
-                    <label class="form-label fw-bold">
+        <div class="row">
 
-                        Nombre del Turno
+          
 
-                    </label>
-
-                    <input class="form-control"
-                           value="@Model.NombreTurno"
-                           readonly />
-
-                </div>
-
-                <div class="col-md-3 mb-4">
-
-                    <label class="form-label fw-bold">
-
-                        Hora de Entrada
-
-                    </label>
-
-                    <input class="form-control"
-                           value="@Model.HoraEntrada"
-                           readonly />
-
-                </div>
-
-                <div class="col-md-3 mb-4">
-
-                    <label class="form-label fw-bold">
-
-                        Hora de Salida
-
-                    </label>
-
-                    <input class="form-control"
-                           value="@Model.HoraSalida"
-                           readonly />
-
-                </div>
-
-            </div>
-
-            <div class="mb-4">
+            <div class="col-md-6 mb-4">
 
                 <label class="form-label fw-bold">
 
-                    Descripción
+                    Nombre del Turno
 
                 </label>
 
-                <textarea class="form-control"
-                          rows="4"
-                          readonly>@Model.Descripcion</textarea>
+                <div class="form-control bg-light">
+
+                    @Model.NombreTurno
+
+                </div>
 
             </div>
 
-            <div class="mb-4">
+            <!-- Estado -->
+
+            <div class="col-md-6 mb-4">
 
                 <label class="form-label fw-bold">
 
@@ -90,51 +61,112 @@
 
                 </label>
 
-                <br />
+                <div>
 
-                @if (Model.Estado == "Activo")
-                {
-                    <span class="badge bg-success">
+                    @if (Model.Estado == "Activo")
+                    {
+                        <span class="badge bg-success fs-6">
 
-                        Activo
+                            Activo
 
-                    </span>
-                }
-                else
-                {
-                    <span class="badge bg-danger">
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger fs-6">
 
-                        Inactivo
+                            Inactivo
 
-                    </span>
-                }
+                        </span>
+                    }
+
+                </div>
+
+            </div>
+
+            <!-- Hora Entrada -->
+
+            <div class="col-md-6 mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Hora de Entrada
+
+                </label>
+
+                <div class="form-control bg-light">
+
+                    @Model.HoraEntrada.ToString(@"hh\:mm")
+
+                </div>
 
             </div>
 
-            <hr />
+            <!-- Hora Salida -->
 
-            <div class="d-flex justify-content-between">
+            <div class="col-md-6 mb-4">
 
-                <a asp-action="Index"
-                   class="btn btn-secondary">
+                <label class="form-label fw-bold">
 
-                    <i class="bi bi-arrow-left"></i>
+                    Hora de Salida
 
-                    Regresar
+                </label>
 
-                </a>
+                <div class="form-control bg-light">
 
-                <a asp-action="Edit"
-                   asp-route-id="@Model.IdTurno"
-                   class="btn btn-warning">
+                    @Model.HoraSalida.ToString(@"hh\:mm")
 
-                    <i class="bi bi-pencil-square"></i>
-
-                    Editar
-
-                </a>
+                </div>
 
             </div>
+
+            <!-- Descripción -->
+
+            <div class="col-12 mb-4">
+
+                <label class="form-label fw-bold">
+
+                    Descripción
+
+                </label>
+
+                <div class="form-control bg-light"
+                     style="min-height:120px;">
+
+                    @(string.IsNullOrWhiteSpace(Model.Descripcion)
+                                        ? "Sin descripción."
+                                        : Model.Descripcion)
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--=========================================
+            BOTONES
+        =========================================-->
+
+        <div class="d-flex justify-content-end gap-2">
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left-circle"></i>
+
+                Regresar
+
+            </a>
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.IdTurno"
+               class="btn btn-warning">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Editar
+
+            </a>
 
         </div>
 

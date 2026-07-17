@@ -8,9 +8,7 @@ namespace SIGEBOM.Datos.Models
         [Key]
         public int IdDetalleProgramacionTurno { get; set; }
 
-        //==========================
-        // Llaves Foráneas
-        //==========================
+      
 
         [Required]
         [ForeignKey(nameof(ProgramacionTurno))]

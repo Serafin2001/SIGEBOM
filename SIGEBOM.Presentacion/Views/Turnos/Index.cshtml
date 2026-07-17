@@ -4,188 +4,206 @@
     ViewData["Title"] = "Turnos";
 }
 
-<div class="container-fluid">
+<div class="crud-container">
 
-    <div class="card">
+    <!--=========================================
+        CABECERA
+    =========================================-->
 
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="crud-header">
 
-            <div>
+        <div>
 
-                <h3>
+            <h2>
 
-                    <i class="bi bi-clock-history"></i>
+                Gestión de Turnos
 
-                    Turnos
+            </h2>
 
-                </h3>
+            <p>
 
-                <small class="text-muted">
+                Administración de los turnos del Cuerpo de Bomberos.
 
-                    Administración de turnos del cuerpo de bomberos.
-
-                </small>
-
-            </div>
-
-            <a asp-action="Create"
-               class="btn btn-danger">
-
-                <i class="bi bi-plus-circle"></i>
-
-                Nuevo Turno
-
-            </a>
+            </p>
 
         </div>
 
-        <div class="card-body">
+        <a asp-action="Create"
+           class="btn btn-primary">
 
-            <form method="get"
-                  class="row mb-4">
+            <i class="bi bi-plus-circle"></i>
 
-                <div class="col-md-5">
+            Nuevo Turno
 
-                    <input type="text"
-                           name="buscar"
-                           value="@ViewBag.Buscar"
-                           class="form-control"
-                           placeholder="Buscar por nombre del turno..." />
+        </a>
 
-                </div>
+    </div>
 
-                <div class="col-auto">
+    <!--=========================================
+        BUSCADOR
+    =========================================-->
 
-                    <button class="btn btn-primary">
+    <form method="get"
+          class="crud-search mb-4">
 
-                        <i class="bi bi-search"></i>
+        <div class="input-group">
 
-                        Buscar
+            <span class="input-group-text">
 
-                    </button>
+                <i class="bi bi-search"></i>
 
-                </div>
+            </span>
 
-            </form>
+            <input type="text"
+                   name="buscar"
+                   value="@ViewBag.Buscar"
+                   class="form-control"
+                   placeholder="Buscar turno..." />
 
-            <div class="table-responsive">
+            <button class="btn btn-danger">
 
-                <table class="table table-hover align-middle">
+                Buscar
 
-                    <thead>
+            </button>
 
+        </div>
+
+    </form>
+
+    <!--=========================================
+        MENSAJE
+    =========================================-->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+
+            @TempData["Success"]
+
+        </div>
+    }
+
+    <!--=========================================
+        TABLA
+    =========================================-->
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Turno</th>
+
+                    <th>Entrada</th>
+
+                    <th>Salida</th>
+
+                    <th>Estado</th>
+
+                    <th width="180">
+
+                        Acciones
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @if (Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
                         <tr>
 
-                            <th>Nombre</th>
+                            <td>
 
-                            <th>Entrada</th>
+                                @item.NombreTurno
 
-                            <th>Salida</th>
+                            </td>
 
-                            <th>Estado</th>
+                            <td>
 
-                            <th width="180">
+                                @item.HoraEntrada.ToString(@"hh\:mm")
 
-                                Acciones
+                            </td>
 
-                            </th>
+                            <td>
+
+                                @item.HoraSalida.ToString(@"hh\:mm")
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-success">
+
+                                    @item.Estado
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <a asp-action="Details"
+                                   asp-route-id="@item.IdTurno"
+                                   class="btn btn-info btn-sm">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.IdTurno"
+                                   class="btn btn-warning btn-sm">
+
+                                    <i class="bi bi-pencil-square"></i>
+
+                                </a>
+
+                                <form asp-action="Delete"
+                                      asp-route-id="@item.IdTurno"
+                                      method="post"
+                                      class="d-inline">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button class="btn btn-danger btn-sm"
+                                            onclick="return confirm('¿Desea desactivar este turno?')">
+
+                                        <i class="bi bi-trash"></i>
+
+                                    </button>
+
+                                </form>
+
+                            </td>
 
                         </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
 
-                    </thead>
+                        <td colspan="5"
+                            class="text-center">
 
-                    <tbody>
+                            No existen turnos registrados.
 
-                        @if (Model.Any())
-                        {
-                            foreach (var item in Model)
-                            {
-                                <tr>
+                        </td>
 
-                                    <td>
+                    </tr>
+                }
 
-                                        @item.NombreTurno
+            </tbody>
 
-                                    </td>
-
-                                    <td>
-
-                                        <i class="bi bi-clock me-1 text-danger"></i>
-
-                                        @item.HoraEntrada.ToString(@"hh\:mm")
-
-                                    </td>
-
-                                    <td>
-
-                                        <i class="bi bi-clock me-1 text-danger"></i>
-
-                                        @item.HoraSalida.ToString(@"hh\:mm")
-
-                                    </td>
-
-                                    <td>
-
-                                        <span class="badge bg-success">
-
-                                            @item.Estado
-
-                                        </span>
-
-                                    </td>
-
-                                    <td>
-
-                                        <a asp-action="Details"
-                                           asp-route-id="@item.IdTurno"
-                                           class="btn btn-info btn-sm">
-
-                                            <i class="bi bi-eye"></i>
-
-                                        </a>
-
-                                        <a asp-action="Edit"
-                                           asp-route-id="@item.IdTurno"
-                                           class="btn btn-warning btn-sm">
-
-                                            <i class="bi bi-pencil-square"></i>
-
-                                        </a>
-
-                                        <a asp-action="Desactivar"
-                                           asp-route-id="@item.IdTurno"
-                                           class="btn btn-danger btn-sm">
-
-                                            <i class="bi bi-trash"></i>
-
-                                        </a>
-
-                                    </td>
-
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr>
-
-                                <td colspan="5"
-                                    class="text-center">
-
-                                    No existen turnos registrados.
-
-                                </td>
-
-                            </tr>
-                        }
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
+        </table>
 
     </div>
 

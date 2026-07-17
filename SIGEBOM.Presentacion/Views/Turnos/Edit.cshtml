@@ -4,77 +4,117 @@
     ViewData["Title"] = "Editar Turno";
 }
 
-<div class="container-fluid">
+<div class="crud-container">
 
-    <div class="card shadow">
+    <!--=========================================
+        CABECERA
+    =========================================-->
 
-        <div class="card-header bg-warning text-dark">
+    <div class="crud-header">
 
-            <h4 class="mb-0">
+        <div>
 
-                <i class="bi bi-pencil-square"></i>
+            <h2>
 
                 Editar Turno
 
-            </h4>
+            </h2>
+
+            <p>
+
+                Modifique la información del turno seleccionado.
+
+            </p>
 
         </div>
 
-        <div class="card-body">
+    </div>
 
-            <form asp-action="Edit" method="post">
+    <!--=========================================
+        FORMULARIO
+    =========================================-->
 
-                <input asp-for="IdTurno" type="hidden" />
+    <div class="crud-card">
 
-                <div asp-validation-summary="ModelOnly"
-                     class="text-danger mb-3"></div>
+        <form asp-action="Edit" method="post">
 
-                <div class="row">
+            @Html.AntiForgeryToken()
 
-                    <div class="col-md-6 mb-3">
+            <input asp-for="IdTurno" type="hidden" />
 
-                        <label asp-for="NombreTurno" class="form-label"></label>
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger"></div>
 
-                        <input asp-for="NombreTurno"
-                               class="form-control" />
+            <div class="row">
 
-                        <span asp-validation-for="NombreTurno"
-                              class="text-danger"></span>
+                <!-- Nombre -->
 
-                    </div>
+                <div class="col-md-6 mb-3">
 
-                    <div class="col-md-3 mb-3">
+                    <label asp-for="NombreTurno" class="form-label">
 
-                        <label asp-for="HoraEntrada" class="form-label"></label>
+                        Nombre del Turno
 
-                        <input asp-for="HoraEntrada"
-                               type="time"
-                               class="form-control" />
+                    </label>
 
-                        <span asp-validation-for="HoraEntrada"
-                              class="text-danger"></span>
+                    <input asp-for="NombreTurno"
+                           class="form-control" />
 
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-
-                        <label asp-for="HoraSalida" class="form-label"></label>
-
-                        <input asp-for="HoraSalida"
-                               type="time"
-                               class="form-control" />
-
-                        <span asp-validation-for="HoraSalida"
-                              class="text-danger"></span>
-
-                    </div>
+                    <span asp-validation-for="NombreTurno"
+                          class="text-danger"></span>
 
                 </div>
 
-                <div class="mb-4">
+                <!-- Hora Entrada -->
+
+                <div class="col-md-3 mb-3">
+
+                    <label asp-for="HoraEntrada"
+                           class="form-label">
+
+                        Hora de Entrada
+
+                    </label>
+
+                    <input asp-for="HoraEntrada"
+                           type="time"
+                           class="form-control" />
+
+                    <span asp-validation-for="HoraEntrada"
+                          class="text-danger"></span>
+
+                </div>
+
+                <!-- Hora Salida -->
+
+                <div class="col-md-3 mb-3">
+
+                    <label asp-for="HoraSalida"
+                           class="form-label">
+
+                        Hora de Salida
+
+                    </label>
+
+                    <input asp-for="HoraSalida"
+                           type="time"
+                           class="form-control" />
+
+                    <span asp-validation-for="HoraSalida"
+                          class="text-danger"></span>
+
+                </div>
+
+                <!-- Descripción -->
+
+                <div class="col-12 mb-4">
 
                     <label asp-for="Descripcion"
-                           class="form-label"></label>
+                           class="form-label">
+
+                        Descripción
+
+                    </label>
 
                     <textarea asp-for="Descripcion"
                               rows="4"
@@ -85,33 +125,35 @@
 
                 </div>
 
-                <hr />
+            </div>
 
-                <div class="d-flex justify-content-between">
+            <!--=========================================
+                BOTONES
+            =========================================-->
 
-                    <a asp-action="Index"
-                       class="btn btn-secondary">
+            <div class="d-flex justify-content-end gap-2">
 
-                        <i class="bi bi-arrow-left"></i>
+                <a asp-action="Index"
+                   class="btn btn-secondary">
 
-                        Regresar
+                    <i class="bi bi-arrow-left-circle"></i>
 
-                    </a>
+                    Regresar
 
-                    <button type="submit"
-                            class="btn btn-warning">
+                </a>
 
-                        <i class="bi bi-check-circle"></i>
+                <button type="submit"
+                        class="btn btn-warning">
 
-                        Actualizar
+                    <i class="bi bi-pencil-square"></i>
 
-                    </button>
+                    Actualizar
 
-                </div>
+                </button>
 
-            </form>
+            </div>
 
-        </div>
+        </form>
 
     </div>
 
