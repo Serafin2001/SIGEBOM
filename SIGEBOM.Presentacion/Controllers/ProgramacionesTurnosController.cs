@@ -39,12 +39,13 @@ namespace SIGEBOM.Presentacion.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var programacion = await _programacionTurnoService.ObtenerPorId(id);
+            var modelo = await _programacionTurnoService
+                .ObtenerDetalle(id);
 
-            if (programacion == null)
+            if (modelo == null)
                 return NotFound();
 
-            return View(programacion);
+            return View(modelo);
         }
 
 

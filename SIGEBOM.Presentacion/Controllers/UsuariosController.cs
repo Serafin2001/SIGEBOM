@@ -194,9 +194,17 @@ namespace SIGEBOM.Presentacion.Controllers
         // BUSCAR BOMBEROS (MODAL)
         //=========================================
 
-        public async Task<IActionResult> BuscarBomberos(string? buscar)
+        public async Task<IActionResult> BuscarBomberos(
+      string? cedula,
+      string? nombre,
+      string? apellido,
+      int? idRango)
         {
-            var bomberos = await _bomberoService.ObtenerBomberosDisponibles(buscar);
+            var bomberos = await _bomberoService.ObtenerBomberosDisponibles(
+                cedula,
+                nombre,
+                apellido,
+                idRango);
 
             return PartialView("~/Views/Shared/_TablaBomberos.cshtml", bomberos);
         }

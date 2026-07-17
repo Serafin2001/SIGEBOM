@@ -85,11 +85,52 @@ function cargarBomberos(buscar) {
 // BUSCAR EN TIEMPO REAL
 //=========================================
 
-$(document).on("keyup", "#txtBuscarBombero", function () {
 
-    cargarBomberos($(this).val());
+let tiempoBusqueda;
 
-});
+$(document).on("keyup",
+    "#txtCedula, #txtNombre, #txtApellido",
+    function () {
+
+        clearTimeout(tiempoBusqueda);
+
+        tiempoBusqueda = setTimeout(function () {
+
+            buscarBomberos();
+
+        }, 300);
+
+    });
+
+function buscarBomberos() {
+
+    let cedula = $("#txtCedula").val();
+
+    let nombre = $("#txtNombre").val();
+
+    let apellido = $("#txtApellido").val();
+
+    let rango = $("#cmbRango").val();
+
+    $("#contenidoBomberos").load(
+
+        "/Usuarios/BuscarBomberos?" +
+
+        $.param({
+
+            cedula: cedula,
+
+            nombre: nombre,
+
+            apellido: apellido,
+
+            idRango: rango
+
+        })
+
+    );
+
+}
 
 //=========================================
 // BOTÓN BUSCAR
@@ -160,3 +201,20 @@ $(document).on("click", "#btnAceptarBomberos", function () {
         .hide();
 
 });
+
+
+$(document).on("click",
+    "#btnLimpiarBusqueda",
+    function () {
+
+        $("#txtCedula").val("");
+
+        $("#txtNombre").val("");
+
+        $("#txtApellido").val("");
+
+        $("#cmbRango").val("");
+
+        buscarBomberos();
+
+    });

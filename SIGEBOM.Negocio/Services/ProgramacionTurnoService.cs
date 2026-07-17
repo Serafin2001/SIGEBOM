@@ -10,12 +10,15 @@ namespace SIGEBOM.Negocio.Services
     public class ProgramacionTurnoService : IProgramacionTurnoService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IDetalleProgramacionTurnoService _detalleService;
 
-        public ProgramacionTurnoService(ApplicationDbContext context)
+        public ProgramacionTurnoService(
+       ApplicationDbContext context,
+       IDetalleProgramacionTurnoService detalleService)
         {
             _context = context;
+            _detalleService = detalleService;
         }
-
         //=========================================
         // OBTENER TODAS LAS PROGRAMACIONES
         //=========================================
@@ -53,8 +56,7 @@ namespace SIGEBOM.Negocio.Services
         }
 
 
-        public async Task<ResultadoOperacion> Crear(
-            ProgramacionTurno programacion,
+        public async Task<ResultadoOperacion> Crear( ProgramacionTurno programacion,
             List<int> bomberos)
         {
             using var transaccion = await _context.Database.BeginTransactionAsync();
@@ -143,6 +145,23 @@ namespace SIGEBOM.Negocio.Services
 
                 await _context.SaveChangesAsync();
 
+                foreach (var idBombero in bomberos)
+                {
+                    bool existe = await _detalleService.BomberoYaProgramado(
+                        idBombero,
+                        programacion.Fecha,
+                        programacion.IdTurno);
+
+                    if (existe)
+                    {
+                        return new ResultadoOperacion
+                        {
+                            Exitoso = false,
+                            Mensaje = "Uno o más bomberos ya están asignados a este turno en la fecha seleccionada."
+                        };
+                    }
+                }
+
                 //=========================================
                 // DETALLE
                 //=========================================
@@ -216,16 +235,26 @@ namespace SIGEBOM.Negocio.Services
                     programacionBD.DetallesProgramacion);
 
                 await _context.SaveChangesAsync();
+                await _detalleService.ActualizarBomberos(
+                programacion.IdProgramacionTurno,
+                bomberos);
 
                 foreach (var idBombero in bomberos)
                 {
-                    _context.DetalleProgramacionTurnos.Add(
-                        new DetalleProgramacionTurno
+                    bool existe = await _detalleService.BomberoYaProgramado(
+                        idBombero,
+                        programacion.Fecha,
+                        programacion.IdTurno,
+                        programacion.IdProgramacionTurno);
+
+                    if (existe)
+                    {
+                        return new ResultadoOperacion
                         {
-                            IdProgramacionTurno = programacionBD.IdProgramacionTurno,
-                            IdBombero = idBombero,
-                            Estado = "Asignado"
-                        });
+                            Exitoso = false,
+                            Mensaje = "Uno o más bomberos ya están asignados a este turno en la fecha seleccionada."
+                        };
+                    }
                 }
 
                 await _context.SaveChangesAsync();
@@ -270,6 +299,7 @@ namespace SIGEBOM.Negocio.Services
             }
 
             programacion.Estado = "Cancelado";
+            await _detalleService.EliminarTodos(id);
 
             _context.Update(programacion);
 
@@ -322,6 +352,26 @@ namespace SIGEBOM.Negocio.Services
                 BomberosSeleccionados = bomberos
                     .Select(b => b.IdBombero)
                     .ToList()
+            };
+        }
+
+        public async Task<ProgramacionTurnoDetailsViewModel?> ObtenerDetalle(int id)
+        {
+            var programacion = await _context.ProgramacionTurnos
+                .Include(p => p.Turno)
+                .Include(p => p.Encargado)
+                .FirstOrDefaultAsync(p => p.IdProgramacionTurno == id);
+
+            if (programacion == null)
+                return null;
+
+            var bomberos = await _detalleService
+                .ObtenerPorProgramacion(id);
+
+            return new ProgramacionTurnoDetailsViewModel
+            {
+                Programacion = programacion,
+                Bomberos = bomberos
             };
         }
     }

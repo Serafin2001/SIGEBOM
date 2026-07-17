@@ -50,40 +50,50 @@ namespace SIGEBOM.Negocio.Services
         // BOMBEROS DISPONIBLES
 
 
-        public async Task<List<Bombero>> ObtenerBomberosDisponibles(string? buscar)
+        public async Task<List<Bombero>> ObtenerBomberosDisponibles(
+          string? cedula,
+          string? nombre,
+          string? apellido,
+          int? idRango)
         {
-            var bomberos = _context.Bomberos
+            var consulta = _context.Bomberos
                 .Include(b => b.Rango)
                 .Include(b => b.Cargo)
-                .Include(b => b.Usuario)
-                .Where(b =>
-                    b.Estado == "Activo" &&
-                    b.Usuario == null)
+                .Where(b => b.Estado == "Activo")
                 .AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(buscar))
+            if (!string.IsNullOrWhiteSpace(cedula))
             {
-                buscar = buscar.Trim();
-
-                bomberos = bomberos.Where(b =>
-
-                    EF.Functions.Like(b.Cedula, $"%{buscar}%") ||
-
-                    EF.Functions.Like(b.Nombre, $"%{buscar}%") ||
-
-                    EF.Functions.Like(b.Apellido, $"%{buscar}%"));
+                consulta = consulta.Where(b =>
+                    b.Cedula.Contains(cedula));
             }
 
-            return await bomberos
-                .OrderBy(b => b.Rango.OrdenJerarquico)
-                .ThenBy(b => b.Apellido)
+            if (!string.IsNullOrWhiteSpace(nombre))
+            {
+                consulta = consulta.Where(b =>
+                    b.Nombre.Contains(nombre));
+            }
+
+            if (!string.IsNullOrWhiteSpace(apellido))
+            {
+                consulta = consulta.Where(b =>
+                    b.Apellido.Contains(apellido));
+            }
+
+            if (idRango.HasValue)
+            {
+                consulta = consulta.Where(b =>
+                    b.IdRango == idRango);
+            }
+
+            return await consulta
+                .OrderBy(b => b.Apellido)
                 .ThenBy(b => b.Nombre)
                 .ToListAsync();
         }
 
- 
         // OBTENER POR ID
-     
+
 
         public async Task<Bombero?> ObtenerPorId(int id)
         {

@@ -17,6 +17,10 @@ namespace SIGEBOM.Negocio.Interfaces
 
         Task<bool> ExisteCedula(string cedula);
 
-        Task<List<Bombero>> ObtenerBomberosDisponibles(string? buscar);
+        Task<List<Bombero>> ObtenerBomberosDisponibles(
+     string? cedula,
+     string? nombre,
+     string? apellido,
+     int? idRango);
     }
 }

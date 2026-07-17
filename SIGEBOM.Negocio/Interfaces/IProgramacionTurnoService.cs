@@ -23,5 +23,6 @@ namespace SIGEBOM.Negocio.Interfaces
         Task<ResultadoOperacion> Desactivar(int id);
 
         Task<ProgramacionTurnoViewModel?> ObtenerViewModelEditar(int id);
+        Task<ProgramacionTurnoDetailsViewModel?> ObtenerDetalle(int id);
     }
 }

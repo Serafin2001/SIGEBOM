@@ -1,19 +1,21 @@
 ﻿<div class="modal fade"
      id="modalBomberos"
      tabindex="-1"
+     aria-labelledby="modalBomberosLabel"
      aria-hidden="true">
 
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 
         <div class="modal-content">
 
             <!--=========================================
                 CABECERA
-            =========================================-->
+            ==========================================-->
 
-            <div class="modal-header bg-danger text-white">
+            <div class="modal-header">
 
-                <h5 class="modal-title">
+                <h5 class="modal-title"
+                    id="modalBomberosLabel">
 
                     <i class="bi bi-person-badge-fill me-2"></i>
 
@@ -28,45 +30,185 @@
 
             </div>
 
-
+            <!--=========================================
+                CUERPO
+            ==========================================-->
 
             <div class="modal-body">
 
-                <div class="row mb-3">
+                <!--==========================
+                    PANEL DE FILTROS
+                ==========================-->
 
-                    <div class="col-md-8">
+                <div class="card shadow-sm border-0 mb-4">
 
-                        <input type="text"
-                               id="txtBuscarBombero"
-                               class="form-control"
-                               placeholder="Buscar por nombre, apellido o cédula..." />
+                    <div class="card-header bg-white">
+
+                        <h6 class="mb-0 fw-semibold">
+
+                            <i class="bi bi-funnel-fill text-danger me-2"></i>
+
+                            Filtros de búsqueda
+
+                        </h6>
 
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="card-body">
 
-                        <button id="btnBuscarBombero"
-                                type="button"
-                                class="btn btn-danger w-100">
+                        <div class="row g-3">
 
-                            <i class="bi bi-search"></i>
+                            <!-- CÉDULA -->
 
-                            Buscar
+                            <div class="col-lg-3 col-md-6">
 
-                        </button>
+                                <label class="form-label">
+
+                                    Cédula
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="bi bi-credit-card"></i>
+
+                                    </span>
+
+                                    <input type="text"
+                                           id="txtCedula"
+                                           class="form-control"
+                                           placeholder="402-0000000-0">
+
+                                </div>
+
+                            </div>
+
+                            <!-- NOMBRE -->
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <label class="form-label">
+
+                                    Nombre
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="bi bi-person"></i>
+
+                                    </span>
+
+                                    <input type="text"
+                                           id="txtNombre"
+                                           class="form-control"
+                                           placeholder="Nombre">
+
+                                </div>
+
+                            </div>
+
+                            <!-- APELLIDO -->
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <label class="form-label">
+
+                                    Apellido
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="bi bi-person"></i>
+
+                                    </span>
+
+                                    <input type="text"
+                                           id="txtApellido"
+                                           class="form-control"
+                                           placeholder="Apellido">
+
+                                </div>
+
+                            </div>
+
+                            <!-- RANGO -->
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <label class="form-label">
+
+                                    Rango
+
+                                </label>
+
+                                <select id="cmbRango"
+                                        class="form-select">
+
+                                    <option value="">
+
+                                        Todos
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-4">
+
+                            <div class="col text-end">
+
+                                <button type="button"
+                                        id="btnLimpiarBusqueda"
+                                        class="btn btn-outline-secondary">
+
+                                    <i class="bi bi-arrow-clockwise"></i>
+
+                                    Limpiar
+
+                                </button>
+
+                                <button type="button"
+                                        id="btnBuscarBombero"
+                                        class="btn btn-danger">
+
+                                    <i class="bi bi-search"></i>
+
+                                    Buscar
+
+                                </button>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
 
+                <!--==========================
+                    TABLA
+                ==========================-->
+
                 <div id="contenidoBomberos">
 
-                    <div class="text-center p-5">
+                    <div class="text-center py-5">
 
-                        <div class="spinner-border text-danger">
+                        <div class="spinner-border text-danger"
+                             role="status">
                         </div>
 
-                        <p class="mt-3">
+                        <p class="mt-3 text-muted">
 
                             Cargando bomberos...
 
@@ -80,17 +222,28 @@
 
             <!--=========================================
                 FOOTER
-            =========================================-->
+            ==========================================-->
 
             <div class="modal-footer">
+
+                <div class="me-auto">
+
+                    <small class="text-muted">
+
+                        Seleccione un bombero y presione
+                        <strong>Seleccionar</strong>.
+
+                    </small>
+
+                </div>
 
                 <button type="button"
                         class="btn btn-secondary"
                         data-bs-dismiss="modal">
 
-                    <i class="bi bi-x-circle"></i>
+                    <i class="bi bi-x-circle me-1"></i>
 
-                    Cancelar
+                    Cerrar
 
                 </button>
 
@@ -98,7 +251,7 @@
                         id="btnAceptarBomberos"
                         class="btn btn-danger">
 
-                    <i class="bi bi-check-circle"></i>
+                    <i class="bi bi-check-circle me-1"></i>
 
                     Aceptar
 

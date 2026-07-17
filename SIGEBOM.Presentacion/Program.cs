@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SIGEBOM.Datos.Context;
 using SIGEBOM.Negocio.Interfaces;
 using SIGEBOM.Negocio.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+using SIGEBOM.Negocio.Servicios;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,7 @@ builder.Services.AddScoped<IBomberoService, BomberoService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITurnoService, TurnoService>();
 builder.Services.AddScoped<IProgramacionTurnoService, ProgramacionTurnoService>();
+builder.Services.AddScoped<IDetalleProgramacionTurnoService, DetalleProgramacionTurnoService>();
 
 
 //=========================================

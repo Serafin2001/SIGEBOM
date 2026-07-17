@@ -1,0 +1,315 @@
+﻿/*=========================================================
+    MODAL BOMBEROS
+=========================================================*/
+
+#modalBomberos .modal-content {
+    border: none;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0,0,0,.18);
+}
+
+/*=========================================================
+    CABECERA
+=========================================================*/
+
+#modalBomberos .modal-header {
+    background: #b71c1c;
+    color: white;
+    padding: 18px 25px;
+    border-bottom: none;
+}
+
+#modalBomberos .modal-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+#modalBomberos .btn-close {
+    opacity: 1;
+}
+
+/*=========================================================
+    CUERPO
+=========================================================*/
+
+#modalBomberos .modal-body {
+    background: #f8f9fa;
+    padding: 25px;
+}
+
+/*=========================================================
+    TARJETA DE FILTROS
+=========================================================*/
+
+#modalBomberos .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+}
+
+#modalBomberos .card-body {
+    padding: 20px;
+}
+
+#modalBomberos label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+/*=========================================================
+    CONTROLES
+=========================================================*/
+
+#modalBomberos .form-control,
+#modalBomberos .form-select {
+    border-radius: 8px;
+    height: 42px;
+    border: 1px solid #ced4da;
+}
+
+    #modalBomberos .form-control:focus,
+    #modalBomberos .form-select:focus {
+        border-color: #b71c1c;
+        box-shadow: 0 0 0 .2rem rgba(183,28,28,.15);
+    }
+
+/*=========================================================
+    BOTONES
+=========================================================*/
+
+#modalBomberos .btn-danger {
+    background: #b71c1c;
+    border-color: #b71c1c;
+}
+
+    #modalBomberos .btn-danger:hover {
+        background: #981616;
+        border-color: #981616;
+    }
+
+#modalBomberos .btn-outline-secondary:hover {
+    background: #6c757d;
+    color: white;
+}
+
+/*=========================================================
+    TABLA
+=========================================================*/
+
+#modalBomberos table {
+    margin-bottom: 0;
+    background: white;
+}
+
+#modalBomberos thead {
+    background: #f1f3f5;
+}
+
+    #modalBomberos thead th {
+        border-bottom: 2px solid #dee2e6;
+        color: #495057;
+        font-size: .92rem;
+        font-weight: 600;
+        padding: 14px;
+    }
+
+#modalBomberos tbody td {
+    padding: 14px;
+    vertical-align: middle;
+}
+
+#modalBomberos tbody tr:hover {
+    background: #fff7f7;
+}
+
+/*=========================================================
+    BADGES
+=========================================================*/
+
+#modalBomberos .badge {
+    padding: .45rem .8rem;
+    border-radius: 30px;
+    font-size: .75rem;
+}
+
+/*=========================================================
+    PAGINACIÓN
+=========================================================*/
+
+#modalBomberos .pagination .page-link {
+    color: #b71c1c;
+}
+
+#modalBomberos .pagination .active .page-link {
+    background: #b71c1c;
+    border-color: #b71c1c;
+    color: white;
+}
+
+/*=========================================================
+    FOOTER
+=========================================================*/
+
+#modalBomberos .modal-footer {
+    background: white;
+    border-top: 1px solid #ececec;
+    padding: 15px 20px;
+}
+
+/*=========================================================
+    SPINNER
+=========================================================*/
+
+#modalBomberos .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/*=========================================================
+    RESPONSIVE
+=========================================================*/
+
+@media (max-width:768px) {
+
+    #modalBomberos .modal-body {
+        padding: 15px;
+    }
+
+    #modalBomberos .card-body {
+        padding: 15px;
+    }
+
+    #modalBomberos table {
+        font-size: .85rem;
+    }
+}
+
+
+/*=========================================================
+    INPUT GROUP
+=========================================================*/
+
+#modalBomberos .input-group-text {
+    background: white;
+    border-right: none;
+    color: #b71c1c;
+}
+
+#modalBomberos .input-group .form-control {
+    border-left: none;
+}
+
+    #modalBomberos .input-group .form-control:focus {
+        box-shadow: none;
+    }
+
+#modalBomberos .input-group:focus-within {
+    border-radius: 8px;
+    box-shadow: 0 0 0 .2rem rgba(183,28,28,.15);
+}
+
+    #modalBomberos .input-group:focus-within .input-group-text,
+    #modalBomberos .input-group:focus-within .form-control {
+        border-color: #b71c1c;
+    }
+
+/*=========================================================
+    TABLA PROFESIONAL
+=========================================================*/
+
+#modalBomberos .table-responsive {
+    max-height: 420px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+}
+
+/* Encabezado fijo */
+
+#modalBomberos thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+    #modalBomberos thead th {
+        background: #f8f9fa;
+        color: #495057;
+        font-weight: 600;
+        font-size: .90rem;
+        border-bottom: 2px solid #dee2e6;
+        white-space: nowrap;
+    }
+
+/* Filas */
+
+#modalBomberos tbody tr {
+    transition: all .20s ease;
+}
+
+    #modalBomberos tbody tr:hover {
+        background: #fff5f5;
+    }
+
+#modalBomberos tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+}
+
+/*=========================================================
+    BOTÓN SELECCIONAR
+=========================================================*/
+
+#modalBomberos .seleccionarBombero {
+    min-width: 105px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: .2s;
+}
+
+    #modalBomberos .seleccionarBombero:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(183,28,28,.25);
+    }
+
+/*=========================================================
+    BADGES
+=========================================================*/
+
+#modalBomberos .badge {
+    padding: .55rem .90rem;
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+/*=========================================================
+    CARD TABLA
+=========================================================*/
+
+#modalBomberos .card-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ececec;
+}
+
+#modalBomberos .card-footer {
+    padding: 15px 20px;
+}
+
+/*=========================================================
+    SCROLL
+=========================================================*/
+
+#modalBomberos .table-responsive::-webkit-scrollbar {
+    width: 8px;
+}
+
+#modalBomberos .table-responsive::-webkit-scrollbar-thumb {
+    background: #c5c5c5;
+    border-radius: 20px;
+}
+
+    #modalBomberos .table-responsive::-webkit-scrollbar-thumb:hover {
+        background: #9c9c9c;
+    }
