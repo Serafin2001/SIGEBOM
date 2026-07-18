@@ -1,0 +1,148 @@
+﻿@model SIGEBOM.Datos.Models.TipoIncidente
+
+@{
+    ViewData["Title"] = "Detalle del Tipo de Incidente";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold text-info">
+                <i class="bi bi-eye-fill me-2"></i>
+                Detalle del Tipo de Incidente
+            </h2>
+
+            <p class="text-muted">
+                Información detallada del tipo de incidente.
+            </p>
+
+        </div>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left-circle"></i>
+
+            Volver
+
+        </a>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-danger text-white">
+
+            <h5 class="mb-0">
+
+                Información General
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label fw-bold">
+
+                        Código
+
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.IdTipoIncidente"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label fw-bold">
+
+                        Estado
+
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.Estado"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label fw-bold">
+
+                    Codigo
+
+                </label>
+
+                <input class="form-control"
+                       value="@Model.Codigo"
+                       readonly />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label fw-bold">
+
+                    Nombre
+
+                </label>
+
+                <input class="form-control"
+                       value="@Model.Nombre"
+                       readonly />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label fw-bold">
+
+                    Descripción
+
+                </label>
+
+                <textarea class="form-control"
+                          rows="5"
+                          readonly>@Model.Descripcion</textarea>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer text-end">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.IdTipoIncidente"
+               class="btn btn-warning">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Editar
+
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Regresar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

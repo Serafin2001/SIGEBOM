@@ -67,13 +67,13 @@
 
                     <tr>
 
-                        <th width="80">ID</th>
+                      
 
                         <th>Nombre</th>
 
                         <th>Descripción</th>
 
-                        <th width="120">Estado</th>
+                        
 
                         <th width="220">Acciones</th>
 
@@ -89,11 +89,6 @@
                         {
                             <tr>
 
-                                <td>
-
-                                    @item.IdCargo
-
-                                </td>
 
                                 <td>
 
@@ -101,32 +96,11 @@
 
                                 </td>
 
-                                <td>
-
+                                <td class="descripcion" title="@item.Descripcion">
                                     @item.Descripcion
-
                                 </td>
 
-                                <td>
-
-                                    @if (item.Estado == "Activo")
-                                    {
-                                        <span class="badge bg-success">
-
-                                            Activo
-
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-danger">
-
-                                            Inactivo
-
-                                        </span>
-                                    }
-
-                                </td>
+                             
 
                                 <td>
 

@@ -401,3 +401,11 @@ hr {
 .mb-3:last-child {
     margin-bottom: 0 !important;
 }
+
+
+.descripcion {
+    max-width: 450px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

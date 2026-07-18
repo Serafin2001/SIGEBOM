@@ -74,15 +74,15 @@
 
                     <tr>
 
-                        <th>Orden</th>
+                        <th style="width:80px;">Orden</th>
 
-                        <th>Nombre</th>
+                        <th style="width:220px;">Nombre</th>
 
                         <th>Descripción</th>
 
-                        <th>Estado</th>
+                        <th style="width:100px;">Estado</th>
 
-                        <th width="220">Acciones</th>
+                        <th style="width:180px;" class="text-center">Acciones</th>
 
                     </tr>
 
@@ -98,7 +98,9 @@
 
                             <td>@item.NombreRango</td>
 
-                            <td>@item.Descripcion</td>
+                            <td class="descripcion" title="@item.Descripcion">
+                                @item.Descripcion
+                            </td>
 
                             <td>
 
@@ -117,7 +119,7 @@
 
                             </td>
 
-                            <td>
+                            <td class="text-center">
 
                                 <a asp-action="Details"
                                    asp-route-id="@item.IdRango"

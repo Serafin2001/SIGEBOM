@@ -1,0 +1,157 @@
+﻿@model IEnumerable<SIGEBOM.Datos.Models.Incidente>
+
+@{
+    ViewData["Title"] = "Incidentes";
+}
+
+<div class="card shadow">
+
+    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+
+        <h4 class="mb-0">
+            <i class="bi bi-fire"></i>
+            Gestión de Incidentes
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show">
+
+                <i class="bi bi-check-circle"></i>
+
+                @TempData["Success"]
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                </button>
+
+            </div>
+        }
+
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center">
+
+                <i class="bi bi-info-circle"></i>
+
+                No existen incidentes registrados.
+
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th width="70">ID</th>
+
+                            <th>Fecha</th>
+
+                           
+
+                            <th>Tipo de Incidente</th>
+
+                            <th width="120">Estado</th>
+
+                            <th width="220" class="text-center">
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.IdIncidente</td>
+
+                                <td>@item.FechaHoraIncidente.ToString("dd/MM/yyyy HH:mm")</td>
+
+                               
+
+                                <td>@item.TipoIncidente.Nombre</td>
+
+                                <td>
+
+                                    @switch (item.Estado)
+                                    {
+                                        case "Pendiente":
+                                            <span class="badge bg-warning text-dark">
+                                                Pendiente
+                                            </span>
+                                            break;
+
+                                        case "En Atención":
+                                            <span class="badge bg-primary">
+                                                En Atención
+                                            </span>
+                                            break;
+
+                                        case "Finalizado":
+                                            <span class="badge bg-success">
+                                                Finalizado
+                                            </span>
+                                            break;
+
+                                        default:
+                                            <span class="badge bg-secondary">
+                                                @item.Estado
+                                            </span>
+                                            break;
+                                    }
+
+                                </td>
+
+                                <td class="text-center">
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.IdIncidente"
+                                       class="btn btn-info btn-sm"
+                                       title="Ver">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.IdIncidente"
+                                       class="btn btn-warning btn-sm"
+                                       title="Editar">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    <a asp-controller="BomberoIncidente"
+                                       asp-action="Index"
+                                       asp-route-idIncidente="@item.IdIncidente"
+                                       class="btn btn-primary btn-sm"
+                                       title="Asignar Bomberos">
+                                        <i class="bi bi-people-fill"></i>
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+
+    </div>
+
+</div>

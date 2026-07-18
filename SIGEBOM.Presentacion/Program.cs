@@ -22,11 +22,16 @@ builder.Services.AddScoped<IRangoService, RangoService>();
 builder.Services.AddScoped<ICargoService, CargoService>();
 
 builder.Services.AddScoped<IBomberoService, BomberoService>();
-
+builder.Services.AddScoped<IBomberoIncidenteService, BomberoIncidenteService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITurnoService, TurnoService>();
 builder.Services.AddScoped<IProgramacionTurnoService, ProgramacionTurnoService>();
 builder.Services.AddScoped<IDetalleProgramacionTurnoService, DetalleProgramacionTurnoService>();
+builder.Services.AddScoped<ITipoIncidenteService, TipoIncidenteService>();
+
+builder.Services.AddScoped<ILlamadaEmergenciaService, LlamadaEmergenciaService>();
+
+builder.Services.AddScoped<IIncidenteService, IncidenteService>();
 
 
 //=========================================

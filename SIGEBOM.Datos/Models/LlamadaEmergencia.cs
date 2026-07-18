@@ -17,14 +17,19 @@ namespace SIGEBOM.Datos.Models
         [StringLength(15)]
         public string Telefono { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "La dirección es obligatoria.")]
         [StringLength(150)]
-        public string? Direccion { get; set; }
+        public string Direccion { get; set; } = string.Empty;
 
         [Required]
-        public DateTime FechaHora { get; set; }
+        public DateTime FechaHora { get; set; } = DateTime.Now;
 
         [StringLength(255)]
         public string? Observacion { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string Estado { get; set; } = "Pendiente";
 
         // Llave foránea del usuario que registró la llamada
         [Required]

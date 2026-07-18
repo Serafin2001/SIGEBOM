@@ -1,0 +1,511 @@
+﻿@model SIGEBOM.Negocio.ViewModels.BomberoIncidenteIndexViewModel
+
+@{
+    ViewData["Title"] = "Bomberos Asignados";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+
+                <i class="bi bi-people-fill"></i>
+
+                Bomberos Asignados al Incidente
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-2">
+
+                    <label class="form-label fw-bold">
+                        No. Incidente
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.Incidente.IdIncidente"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label fw-bold">
+                        Tipo de Incidente
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.Incidente.TipoIncidente.Nombre"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+                        Dirección
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.Incidente.Direccion"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col-md-4">
+
+                    <label class="form-label fw-bold">
+                        Fecha
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.Incidente.FechaHoraIncidente.ToString("dd/MM/yyyy HH:mm")"
+                           readonly />
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card shadow-sm">
+
+            <div class="card-header d-flex justify-content-between align-items-center">
+
+                <h5 class="mb-0">
+
+                    Bomberos Asignados
+
+                </h5>
+
+                <button class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalAgregarBombero">
+
+                    <i class="bi bi-plus-circle"></i>
+
+                    Agregar Bombero
+
+                </button>
+
+            </div>
+
+            <div class="card-body">
+
+                @if (!Model.Bomberos.Any())
+                {
+                    <div class="alert alert-info">
+
+                        No hay bomberos asignados.
+
+                    </div>
+                }
+                else
+                {
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle">
+
+                            <thead class="table-dark">
+
+                                <tr>
+
+                                    <th>Bombero</th>
+
+                                    <th>Función</th>
+
+                                    <th>Estado</th>
+
+                                    <th width="150">
+
+                                        Acciones
+
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model.Bomberos)
+                                {
+                                    <tr>
+
+                                        <td>
+
+                                            @item.Bombero.Nombre
+
+                                            @item.Bombero.Apellido
+
+                                        </td>
+
+                                        <td>
+
+                                            @item.Funcion
+
+                                        </td>
+
+                                        <td>
+
+                                            @if (item.Estado == "Activo")
+                                            {
+                                                <span class="badge bg-success">
+
+                                                    Activo
+
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">
+
+                                                    Inactivo
+
+                                                </span>
+                                            }
+
+                                        </td>
+
+                                        <td>
+
+                                            <a asp-action="Edit"
+                                               asp-route-id="@item.IdBomberoIncidente"
+                                               class="btn btn-warning btn-sm">
+
+                                                <i class="bi bi-pencil"></i>
+
+                                            </a>
+
+                                            <a asp-action="Details"
+                                               asp-route-id="@item.IdBomberoIncidente"
+                                               class="btn btn-info btn-sm">
+
+                                                <i class="bi bi-eye"></i>
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modal Agregar Bombero -->
+    <div class="modal fade"
+         id="modalAgregarBombero"
+         tabindex="-1"
+         aria-labelledby="modalAgregarBomberoLabel"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+
+                <form asp-action="Create" method="post">
+
+                    <div class="modal-header bg-danger text-white">
+
+                        <h5 class="modal-title" id="modalAgregarBomberoLabel">
+
+                            <i class="bi bi-person-plus-fill"></i>
+
+                            Agregar Bombero al Incidente
+
+                        </h5>
+
+                        <button type="button"
+                                class="btn-close btn-close-white"
+                                data-bs-dismiss="modal">
+                        </button>
+
+                    </div>
+
+                    <div class="modal-body">
+
+                        <input asp-for="NuevoBombero.IdIncidente" type="hidden" />
+
+                        <input asp-for="NuevoBombero.IdBombero" type="hidden" id="IdBombero" />
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Bombero
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <input asp-for="NuevoBombero.NombreBombero"
+                                       id="NombreBombero"
+                                       class="form-control"
+                                       readonly />
+
+                                <button type="button"
+                                        class="btn btn-outline-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalBuscarBombero">
+
+                                    <i class="bi bi-search"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label asp-for="NuevoBombero.Funcion"
+                                   class="form-label">
+                            </label>
+
+                            <select asp-for="NuevoBombero.Funcion"
+                                    class="form-select">
+
+                                <option value="">Seleccione...</option>
+
+                                <option>Jefe de Dotación</option>
+
+                                <option>Conductor</option>
+
+                                <option>Bombero</option>
+
+                                <option>Paramédico</option>
+
+                                <option>Rescatista</option>
+
+                                <option>Operador</option>
+
+                                <option>Supervisor</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label asp-for="NuevoBombero.Observacion"
+                                   class="form-label">
+                            </label>
+
+                            <textarea asp-for="NuevoBombero.Observacion"
+                                      class="form-control"
+                                      rows="3">
+                        </textarea>
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+
+                            Cancelar
+
+                        </button>
+
+                        <button type="submit"
+                                class="btn btn-danger">
+
+                            <i class="bi bi-save"></i>
+
+                            Guardar
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Modal Buscar Bombero -->
+    <div class="modal fade"
+         id="modalBuscarBombero"
+         tabindex="-1"
+         aria-labelledby="modalBuscarBomberoLabel"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-xl">
+
+            <div class="modal-content">
+
+                <div class="modal-header bg-primary text-white">
+
+                    <h5 class="modal-title" id="modalBuscarBomberoLabel">
+
+                        <i class="bi bi-search"></i>
+
+                        Buscar Bombero
+
+                    </h5>
+
+                    <button type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row mb-3">
+
+                        <div class="col-md-6">
+
+                            <input id="txtBuscarBombero"
+                                   class="form-control"
+                                   placeholder="Buscar por cédula, nombre o apellido..." />
+
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover table-bordered">
+
+                            <thead class="table-dark">
+
+                                <tr>
+
+                                    <th>Cédula</th>
+
+                                    <th>Nombre</th>
+
+                                    <th>Apellido</th>
+
+                                    <th>Cargo</th>
+
+                                    <th width="120">
+                                        Acción
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="tablaBomberos">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @section Scripts{
+
+        <partial name="_ValidationScriptsPartial" />
+
+        <script>
+
+            cargarBomberos("");
+
+            $("#txtBuscarBombero").keyup(function () {
+
+                cargarBomberos($(this).val());
+
+            });
+
+            function cargarBomberos(filtro) {
+
+                $.get("/BomberoIncidente/BuscarBomberos",
+                    {
+                        filtro: filtro
+                    },
+                    function (data) {
+
+                        let filas = "";
+
+                        $.each(data, function (i, item) {
+
+                            filas += `
+                            <tr>
+
+                                <td>${item.cedula}</td>
+
+                                <td>${item.nombre}</td>
+
+                                <td>${item.apellido}</td>
+
+                                <td>${item.cargo}</td>
+
+                                <td>
+
+                                    <button type="button"
+                                            class="btn btn-success btn-sm"
+                                            onclick="seleccionarBombero(${item.idBombero},
+                                            '${item.nombre} ${item.apellido}')">
+
+                                        Seleccionar
+
+                                    </button>
+
+                                </td>
+
+                            </tr>`;
+                        });
+
+                        $("#tablaBomberos").html(filas);
+
+                    });
+
+            }
+
+            function seleccionarBombero(id, nombre) {
+
+                $("#IdBombero").val(id);
+
+                $("#NombreBombero").val(nombre);
+
+                var modalBuscar = bootstrap.Modal.getInstance(document.getElementById('modalBuscarBombero'));
+                modalBuscar.hide();
+
+            }
+
+        </script>
+
+    }
+
+    </div>

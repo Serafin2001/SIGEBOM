@@ -1,0 +1,121 @@
+﻿@model SIGEBOM.Negocio.ViewModels.TipoIncidenteViewModel
+
+@{
+    ViewData["Title"] = "Nuevo Tipo de Incidente";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold text-danger">
+                <i class="bi bi-plus-circle-fill me-2"></i>
+                Registrar Tipo de Incidente
+            </h2>
+
+            <p class="text-muted">
+                Complete la información del nuevo tipo de incidente.
+            </p>
+
+        </div>
+
+        <a asp-action="Index" class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left-circle"></i>
+
+            Volver
+
+        </a>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form asp-action="Create" method="post">
+
+                <div asp-validation-summary="ModelOnly"
+                     class="alert alert-danger">
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <label asp-for="Codigo" class="form-label"></label>
+
+                    <input asp-for="Codigo"
+                           class="form-control"
+                           placeholder="Ej. INC-001" />
+
+                    <span asp-validation-for="Codigo"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Nombre"
+                           class="form-label fw-bold"></label>
+
+                    <input asp-for="Nombre"
+                           class="form-control"
+                           placeholder="Ej.: Incendio Estructural" />
+
+                    <span asp-validation-for="Nombre"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Descripcion"
+                           class="form-label fw-bold"></label>
+
+                    <textarea asp-for="Descripcion"
+                              rows="4"
+                              class="form-control"
+                              placeholder="Descripción del tipo de incidente">
+                    </textarea>
+
+                    <span asp-validation-for="Descripcion"
+                          class="text-danger"></span>
+
+                </div>
+
+                <hr />
+
+                <div class="text-end">
+
+                    <button type="submit"
+                            class="btn btn-danger">
+
+                        <i class="bi bi-save"></i>
+
+                        Guardar
+
+                    </button>
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        Cancelar
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

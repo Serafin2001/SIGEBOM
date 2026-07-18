@@ -1,0 +1,202 @@
+﻿@model SIGEBOM.Datos.Models.Incidente
+
+@{
+    ViewData["Title"] = "Detalle del Incidente";
+}
+
+<div class="card shadow">
+
+    <div class="card-header bg-danger text-white">
+
+        <h4 class="mb-0">
+            <i class="bi bi-fire"></i>
+            Detalle del Incidente
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label fw-bold">
+                    No. Incidente
+                </label>
+
+                <input class="form-control"
+                       value="@Model.IdIncidente"
+                       readonly />
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label fw-bold">
+                    No. Llamada
+                </label>
+
+                <input class="form-control"
+                       value="@Model.IdLlamada"
+                       readonly />
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label fw-bold">
+                    Tipo de Incidente
+                </label>
+
+                <input class="form-control"
+                       value="@Model.TipoIncidente.Nombre"
+                       readonly />
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label fw-bold">
+                    Fecha y Hora
+                </label>
+
+                <input class="form-control"
+                       value="@Model.FechaHoraIncidente.ToString("dd/MM/yyyy HH:mm")"
+                       readonly />
+
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label fw-bold">
+                Dirección
+            </label>
+
+            <textarea class="form-control"
+                      rows="2"
+                      readonly>@Model.Direccion</textarea>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+
+                <label class="form-label fw-bold">
+                    Hora de Salida
+                </label>
+
+                <input class="form-control"
+                       value="@Model.HoraSalida"
+                       readonly />
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <label class="form-label fw-bold">
+                    Hora de Llegada
+                </label>
+
+                <input class="form-control"
+                       value="@Model.HoraLlegada"
+                       readonly />
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <label class="form-label fw-bold">
+                    Hora de Finalización
+                </label>
+
+                <input class="form-control"
+                       value="@Model.HoraFinalizacion"
+                       readonly />
+
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label fw-bold">
+                Descripción
+            </label>
+
+            <textarea class="form-control"
+                      rows="5"
+                      readonly>@Model.Descripcion</textarea>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label fw-bold">
+                Estado
+            </label>
+
+            <div>
+
+                @switch (Model.Estado)
+                {
+                    case "Pendiente":
+                        <span class="badge bg-warning text-dark fs-6">
+                            Pendiente
+                        </span>
+                        break;
+
+                    case "En Atención":
+                        <span class="badge bg-primary fs-6">
+                            En Atención
+                        </span>
+                        break;
+
+                    case "Finalizado":
+                        <span class="badge bg-success fs-6">
+                            Finalizado
+                        </span>
+                        break;
+
+                    default:
+                        <span class="badge bg-secondary fs-6">
+                            @Model.Estado
+                        </span>
+                        break;
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card-footer d-flex justify-content-end gap-2">
+
+        <a asp-action="Edit"
+           asp-route-id="@Model.IdIncidente"
+           class="btn btn-warning">
+
+            <i class="bi bi-pencil-square"></i>
+            Editar
+
+        </a>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left"></i>
+            Volver
+
+        </a>
+
+    </div>
+
+</div>

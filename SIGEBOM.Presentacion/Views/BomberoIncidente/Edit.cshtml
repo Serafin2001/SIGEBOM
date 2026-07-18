@@ -1,0 +1,131 @@
+﻿@model SIGEBOM.Negocio.ViewModels.BomberoIncidenteViewModel
+
+@{
+    ViewData["Title"] = "Editar Asignación";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-warning">
+
+            <h4 class="mb-0">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Editar Asignación de Bombero
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit">
+
+                <input asp-for="IdBomberoIncidente" type="hidden" />
+                <input asp-for="IdIncidente" type="hidden" />
+                <input asp-for="IdBombero" type="hidden" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="alert alert-danger">
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-8">
+
+                        <label class="form-label">
+                            Bombero
+                        </label>
+
+                        <input asp-for="NombreBombero"
+                               class="form-control"
+                               readonly />
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label asp-for="Funcion"
+                               class="form-label">
+                        </label>
+
+                        <select asp-for="Funcion"
+                                class="form-select">
+
+                            <option value="">Seleccione...</option>
+
+                            <option>Jefe de Dotación</option>
+
+                            <option>Conductor</option>
+
+                            <option>Bombero</option>
+
+                            <option>Paramédico</option>
+
+                            <option>Rescatista</option>
+
+                            <option>Operador</option>
+
+                            <option>Supervisor</option>
+
+                        </select>
+
+                        <span asp-validation-for="Funcion"
+                              class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-3">
+
+                    <label asp-for="Observacion"
+                           class="form-label">
+                    </label>
+
+                    <textarea asp-for="Observacion"
+                              class="form-control"
+                              rows="4">
+                    </textarea>
+
+                    <span asp-validation-for="Observacion"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mt-4">
+
+                    <button class="btn btn-warning">
+
+                        <i class="bi bi-save"></i>
+
+                        Actualizar
+
+                    </button>
+
+                    <a asp-action="Index"
+                       asp-route-idIncidente="@Model.IdIncidente"
+                       class="btn btn-secondary">
+
+                        Cancelar
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

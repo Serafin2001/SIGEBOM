@@ -1,0 +1,160 @@
+﻿@model SIGEBOM.Datos.Models.LlamadaEmergencia
+
+@{
+    ViewData["Title"] = "Detalle de la Llamada";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold text-info">
+                <i class="bi bi-eye-fill me-2"></i>
+                Detalle de la Llamada de Emergencia
+            </h2>
+
+            <p class="text-muted">
+                Información completa de la llamada registrada.
+            </p>
+
+        </div>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left-circle"></i>
+            Volver
+        </a>
+
+    </div>
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <h5 class="mb-0">
+                Información General
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="fw-bold">Reportante</label>
+
+                    <input class="form-control"
+                           value="@Model.NombreReportante"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="fw-bold">Teléfono</label>
+
+                    <input class="form-control"
+                           value="@Model.Telefono"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-8 mb-3">
+
+                    <label class="fw-bold">Dirección</label>
+
+                    <input class="form-control"
+                           value="@Model.Direccion"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="fw-bold">Tipo de Incidente</label>
+
+                    <input class="form-control"
+                           value="@Model.TipoIncidente.Nombre"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="fw-bold">Fecha y Hora</label>
+
+                    <input class="form-control"
+                           value="@Model.FechaHora.ToString("dd/MM/yyyy HH:mm")"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="fw-bold">Estado</label>
+
+                    <input class="form-control"
+                           value="@Model.Estado"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="fw-bold">Registrado por</label>
+
+                    <input class="form-control"
+                           value="@Model.Usuario.NombreUsuario"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="fw-bold">Observaciones</label>
+
+                <textarea class="form-control"
+                          rows="5"
+                          readonly>@Model.Observacion</textarea>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer text-end">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.IdLlamada"
+               class="btn btn-warning">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Editar
+
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Regresar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

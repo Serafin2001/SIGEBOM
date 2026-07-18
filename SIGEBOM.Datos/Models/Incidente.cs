@@ -14,13 +14,24 @@ namespace SIGEBOM.Datos.Models
         public string Direccion { get; set; } = string.Empty;
 
         [Required]
-        public DateTime FechaHoraIncidente { get; set; }
+    
+        public TimeSpan HoraSalida { get; set; }
 
-        public DateTime? HoraSalida { get; set; }
+        [Required]
+        public TimeSpan HoraLlegada { get; set; }
 
-        public DateTime? HoraLlegada { get; set; }
+        [Required]
+        public TimeSpan HoraFinalizacion { get; set; }
 
-        public DateTime? HoraFinalizacion { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string Estado { get; set; } = "Pendiente";
+
+        [StringLength(500)]
+        public string? ObservacionesFinales { get; set; }
+
+        [Display(Name = "Fecha y Hora")]
+        public DateTime FechaHoraIncidente { get; set; } = DateTime.Now;
 
         [StringLength(500)]
         public string? Descripcion { get; set; }

@@ -1,0 +1,175 @@
+﻿@model SIGEBOM.Negocio.ViewModels.LlamadaEmergenciaViewModel
+
+@{
+    ViewData["Title"] = "Editar Llamada de Emergencia";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold text-warning">
+                <i class="bi bi-pencil-square me-2"></i>
+                Editar Llamada de Emergencia
+            </h2>
+
+            <p class="text-muted">
+                Modifique la información de la llamada.
+            </p>
+
+        </div>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left-circle"></i>
+            Volver
+        </a>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form asp-action="Edit" method="post">
+
+                <input asp-for="IdLlamada" type="hidden" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="alert alert-danger">
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label asp-for="NombreReportante" class="form-label fw-bold"></label>
+
+                        <input asp-for="NombreReportante" class="form-control" />
+
+                        <span asp-validation-for="NombreReportante" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label asp-for="Telefono" class="form-label fw-bold"></label>
+
+                        <input asp-for="Telefono" class="form-control" />
+
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-8 mb-3">
+
+                        <label asp-for="Direccion" class="form-label fw-bold"></label>
+
+                        <input asp-for="Direccion" class="form-control" />
+
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="IdTipoIncidente" class="form-label fw-bold">
+                            Tipo de Incidente
+                        </label>
+
+                        <select asp-for="IdTipoIncidente"
+                                asp-items="ViewBag.TiposIncidentes"
+                                class="form-select">
+                        </select>
+
+                        <span asp-validation-for="IdTipoIncidente" class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="FechaHora" class="form-label fw-bold"></label>
+
+                        <input asp-for="FechaHora"
+                               class="form-control"
+                               readonly />
+
+                    </div>
+
+                    <div class="col-md-8 mb-3">
+
+                        <label asp-for="Observacion" class="form-label fw-bold"></label>
+
+                        <textarea asp-for="Observacion"
+                                  class="form-control"
+                                  rows="4">
+                        </textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+
+                        <label asp-for="Estado" class="form-label fw-bold"></label>
+
+                        <select asp-for="Estado" class="form-select">
+
+                            <option value="Pendiente">Pendiente</option>
+
+                            <option value="En Atención">En Atención</option>
+
+                            <option value="Atendida">Atendida</option>
+
+                            <option value="Cancelada">Cancelada</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="text-end">
+
+                    <button type="submit" class="btn btn-warning">
+
+                        <i class="bi bi-save"></i>
+
+                        Actualizar
+
+                    </button>
+
+                    <a asp-action="Index" class="btn btn-secondary">
+
+                        Cancelar
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

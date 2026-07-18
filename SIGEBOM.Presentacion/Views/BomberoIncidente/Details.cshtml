@@ -1,0 +1,136 @@
+﻿@model SIGEBOM.Datos.Models.BomberoIncidente
+
+@{
+    ViewData["Title"] = "Detalle de la Asignación";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+
+                <i class="bi bi-eye-fill"></i>
+
+                Detalle de la Asignación
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+                        Bombero
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.Bombero.Nombre @Model.Bombero.Apellido"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+                        Incidente No.
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.IdIncidente"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+                        Función
+                    </label>
+
+                    <input class="form-control"
+                           value="@Model.Funcion"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+                        Estado
+                    </label>
+
+                    @if (Model.Estado == "Activo")
+                    {
+                        <div>
+
+                            <span class="badge bg-success fs-6">
+                                Activo
+                            </span>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+
+                            <span class="badge bg-secondary fs-6">
+                                Inactivo
+                            </span>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label fw-bold">
+                    Observación
+                </label>
+
+                <textarea class="form-control"
+                          rows="5"
+                          readonly>@Model.Observacion</textarea>
+
+            </div>
+
+            <hr />
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.IdBomberoIncidente"
+               class="btn btn-warning">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Editar
+
+            </a>
+
+            <a asp-action="Index"
+               asp-route-idIncidente="@Model.IdIncidente"
+               class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left-circle"></i>
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,171 @@
+﻿@model SIGEBOM.Negocio.ViewModels.IncidenteViewModel
+
+@{
+    ViewData["Title"] = "Editar Incidente";
+}
+
+<div class="card shadow">
+
+    <div class="card-header bg-warning text-dark">
+
+        <h4 class="mb-0">
+            <i class="bi bi-pencil-square"></i>
+            Editar Incidente
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Edit">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <input asp-for="IdIncidente" type="hidden" />
+            <input asp-for="IdLlamada" type="hidden" />
+            <input asp-for="IdTipoIncidente" type="hidden" />
+
+            <div class="row">
+
+                <div class="col-md-3 mb-3">
+
+                    <label asp-for="IdLlamada" class="form-label"></label>
+
+                    <input asp-for="IdLlamada"
+                           class="form-control"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-9 mb-3">
+
+                    <label asp-for="NombreTipoIncidente" class="form-label"></label>
+
+                    <input asp-for="NombreTipoIncidente"
+                           class="form-control"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-8 mb-3">
+
+                    <label asp-for="Direccion" class="form-label"></label>
+
+                    <input asp-for="Direccion"
+                           class="form-control"
+                           readonly />
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label asp-for="FechaHoraIncidente" class="form-label"></label>
+
+                    <input asp-for="FechaHoraIncidente"
+                           class="form-control"
+                           readonly />
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <div class="row">
+
+                <div class="col-md-4 mb-3">
+
+                    <label asp-for="HoraSalida" class="form-label"></label>
+
+                    <input asp-for="HoraSalida"
+                           type="time"
+                           class="form-control" />
+
+                    <span asp-validation-for="HoraSalida"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label asp-for="HoraLlegada" class="form-label"></label>
+
+                    <input asp-for="HoraLlegada"
+                           type="time"
+                           class="form-control" />
+
+                    <span asp-validation-for="HoraLlegada"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <label asp-for="HoraFinalizacion" class="form-label"></label>
+
+                    <input asp-for="HoraFinalizacion"
+                           type="time"
+                           class="form-control" />
+
+                    <span asp-validation-for="HoraFinalizacion"
+                          class="text-danger"></span>
+
+                </div>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Descripcion"
+                       class="form-label"></label>
+
+                <textarea asp-for="Descripcion"
+                          rows="5"
+                          class="form-control"
+                          placeholder="Describa el incidente..."></textarea>
+
+                <span asp-validation-for="Descripcion"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Volver
+
+                </a>
+
+                <button type="submit"
+                        class="btn btn-warning">
+
+                    <i class="bi bi-save"></i>
+
+                    Guardar Cambios
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
