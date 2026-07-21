@@ -60,7 +60,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("Asistencias");
+                    b.ToTable("Asistencias", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Bombero", b =>
@@ -145,7 +145,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdRango");
 
-                    b.ToTable("Bomberos");
+                    b.ToTable("Bomberos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.BomberoCapacitacion", b =>
@@ -176,7 +176,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("IdBombero", "IdCapacitacion")
                         .IsUnique();
 
-                    b.ToTable("BomberosCapacitaciones");
+                    b.ToTable("BomberosCapacitaciones", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.BomberoIncidente", b =>
@@ -211,7 +211,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("IdBombero", "IdIncidente")
                         .IsUnique();
 
-                    b.ToTable("BomberosIncidentes");
+                    b.ToTable("BomberosIncidentes", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Capacitacion", b =>
@@ -248,7 +248,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasKey("IdCapacitacion");
 
-                    b.ToTable("Capacitaciones");
+                    b.ToTable("Capacitaciones", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Cargo", b =>
@@ -280,7 +280,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("NombreCargo")
                         .IsUnique();
 
-                    b.ToTable("Cargos");
+                    b.ToTable("Cargos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.DetalleInspeccion", b =>
@@ -312,7 +312,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdInspeccion");
 
-                    b.ToTable("DetallesInspecciones");
+                    b.ToTable("DetallesInspecciones", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.DetalleProgramacionTurno", b =>
@@ -347,7 +347,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("IdProgramacionTurno", "IdBombero")
                         .IsUnique();
 
-                    b.ToTable("DetalleProgramacionTurnos");
+                    b.ToTable("DetalleProgramacionTurnos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Herramienta", b =>
@@ -396,7 +396,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdProveedor");
 
-                    b.ToTable("Herramientas");
+                    b.ToTable("Herramientas", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Incidente", b =>
@@ -449,7 +449,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdTipoIncidente");
 
-                    b.ToTable("Incidentes");
+                    b.ToTable("Incidentes", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.InspeccionVehiculo", b =>
@@ -486,7 +486,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdVehiculo");
 
-                    b.ToTable("InspeccionesVehiculos");
+                    b.ToTable("InspeccionesVehiculos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Inventario", b =>
@@ -519,7 +519,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdHerramienta");
 
-                    b.ToTable("Inventarios");
+                    b.ToTable("Inventarios", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.LlamadaEmergencia", b =>
@@ -569,7 +569,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("LlamadasEmergencia");
+                    b.ToTable("LlamadasEmergencia", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Mantenimiento", b =>
@@ -609,7 +609,7 @@ namespace SIGEBOM.Datos.Migrations
 
                     b.HasIndex("IdVehiculo");
 
-                    b.ToTable("Mantenimientos");
+                    b.ToTable("Mantenimientos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.ProgramacionTurno", b =>
@@ -657,7 +657,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("Fecha", "IdTurno")
                         .IsUnique();
 
-                    b.ToTable("ProgramacionTurnos");
+                    b.ToTable("ProgramacionTurnos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Proveedor", b =>
@@ -698,7 +698,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("Proveedores");
+                    b.ToTable("Proveedores", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Rango", b =>
@@ -733,7 +733,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("NombreRango")
                         .IsUnique();
 
-                    b.ToTable("Rangos");
+                    b.ToTable("Rangos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Rol", b =>
@@ -761,7 +761,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("NombreRol")
                         .IsUnique();
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.TipoIncidente", b =>
@@ -797,7 +797,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("TiposIncidentes");
+                    b.ToTable("TiposIncidentes", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Turno", b =>
@@ -835,7 +835,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("NombreTurno")
                         .IsUnique();
 
-                    b.ToTable("Turnos");
+                    b.ToTable("Turnos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Usuario", b =>
@@ -883,7 +883,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("NombreUsuario")
                         .IsUnique();
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Vehiculo", b =>
@@ -927,7 +927,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("Placa")
                         .IsUnique();
 
-                    b.ToTable("Vehiculos");
+                    b.ToTable("Vehiculos", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.VehiculoIncidente", b =>
@@ -955,7 +955,7 @@ namespace SIGEBOM.Datos.Migrations
                     b.HasIndex("IdVehiculo", "IdIncidente")
                         .IsUnique();
 
-                    b.ToTable("VehiculosIncidentes");
+                    b.ToTable("VehiculosIncidentes", (string)null);
                 });
 
             modelBuilder.Entity("SIGEBOM.Datos.Models.Asistencia", b =>
