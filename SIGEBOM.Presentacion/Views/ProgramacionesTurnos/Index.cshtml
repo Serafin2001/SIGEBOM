@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SIGEBOM.Datos.Models.ProgramacionTurno>
+@using System.Globalization
 
 @{
     ViewData["Title"] = "Programación de Turnos";
@@ -18,13 +19,93 @@
 
         </div>
 
-        <a asp-action="Create" class="btn btn-danger">
-            <i class="bi bi-plus-circle"></i>
-            Nueva Programación
-        </a>
+        <div class="d-flex gap-2">
+
+            <a asp-action="Create" class="btn btn-danger">
+                <i class="bi bi-plus-circle"></i>
+                Nueva Programación
+            </a>
+
+
+
+        </div>
 
     </div>
+    <div class="row mb-4">
 
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">Total</h6>
+
+                    <h2 class="text-primary fw-bold">
+                        @ViewBag.Total
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">Programadas</h6>
+
+                    <h2 class="text-primary fw-bold">
+                        @ViewBag.Programadas
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">En Curso</h6>
+
+                    <h2 class="text-warning fw-bold">
+                        @ViewBag.EnCurso
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">Finalizadas</h6>
+
+                    <h2 class="text-success fw-bold">
+                        @ViewBag.Finalizadas
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
     <div class="crud-card">
 
         <form asp-action="Index" method="get" class="row mb-4">
@@ -60,15 +141,23 @@
 
                 <tr>
 
+                    <th>Día</th>
+
                     <th>Fecha</th>
 
                     <th>Turno</th>
 
                     <th>Encargado</th>
 
+                    <th class="text-center">
+                        Bomberos
+                    </th>
+
                     <th>Estado</th>
 
-                    <th width="220">Acciones</th>
+                    <th width="220" class="text-center">
+                        Acciones
+                    </th>
 
                 </tr>
 
@@ -78,96 +167,156 @@
 
                 @if (Model.Any())
                 {
-                    @foreach (var item in Model)
+                <tbody>
+
+                    @if (Model.Any())
+                    {
+                        var grupos = Model
+                        .OrderBy(x => x.Fecha)
+                        .ThenBy(x => x.Turno.NombreTurno)
+                        .GroupBy(x => x.Fecha);
+
+                        foreach (var grupo in grupos)
+                        {
+                            var fecha = grupo.Key.ToDateTime(TimeOnly.MinValue);
+                            var dia = fecha.ToString("dddd", new CultureInfo("es-DO"));
+                            dia = char.ToUpper(dia[0]) + dia.Substring(1);
+
+                            <tr class="table-secondary">
+
+                                <td colspan="7">
+
+                                    <i class="bi bi-calendar-event"></i>
+
+                                    <strong>@dia - @grupo.Key.ToString("dd/MM/yyyy")</strong>
+
+                                </td>
+
+                            </tr>
+
+                            foreach (var item in grupo)
+                            {
+                                <tr>
+
+                                    <td></td>
+
+                                    <td></td>
+
+                                    <td>@item.Turno.NombreTurno</td>
+
+                                    <td>
+
+                                        @item.Encargado.NombreCompleto
+
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <span class="badge bg-info">
+
+                                            @item.DetallesProgramacion.Count
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        @if (item.Estado == "Programado")
+                                        {
+                                            <form asp-action="CambiarEstado"
+                                                  asp-route-id="@item.IdProgramacionTurno"
+                                                  method="post"
+                                                  class="d-inline">
+
+                                                @Html.AntiForgeryToken()
+
+                                                <button type="submit"
+                                                        class="btn btn-success btn-sm"
+                                                        title="Iniciar Turno"
+                                                        onclick="return confirm('¿Desea iniciar este turno?');">
+
+                                                    <i class="bi bi-play-fill"></i>
+
+                                                </button>
+
+                                            </form>
+                                        }
+                                        else if (item.Estado == "En Curso")
+                                        {
+                                            <form asp-action="CambiarEstado"
+                                                  asp-route-id="@item.IdProgramacionTurno"
+                                                  method="post"
+                                                  class="d-inline">
+
+                                                @Html.AntiForgeryToken()
+
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-sm"
+                                                        title="Finalizar Turno"
+                                                        onclick="return confirm('¿Desea finalizar este turno?');">
+
+                                                    <i class="bi bi-check-circle-fill"></i>
+
+                                                </button>
+
+                                            </form>
+                                        }
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <a asp-action="Details"
+                                           asp-route-id="@item.IdProgramacionTurno"
+                                           class="btn btn-info btn-sm">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@item.IdProgramacionTurno"
+                                           class="btn btn-warning btn-sm">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+
+                                        <form asp-action="Delete"
+                                              asp-route-id="@item.IdProgramacionTurno"
+                                              method="post"
+                                              class="d-inline">
+
+                                            @Html.AntiForgeryToken()
+
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('¿Desea cancelar esta programación?');">
+
+                                                <i class="bi bi-trash"></i>
+
+                                            </button>
+
+                                        </form>
+
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                    }
+                    else
                     {
                         <tr>
-
-                            <td>
-                                @item.Fecha.ToString("dd/MM/yyyy")
+                            <td colspan="6" class="text-center">
+                                No existen programaciones registradas.
                             </td>
-
-                            <td>
-                                @item.Turno?.NombreTurno
-                            </td>
-
-                            <td>
-                                @item.Encargado?.NombreCompleto
-                            </td>
-
-                            <td>
-
-                                @if (item.Estado == "Programado")
-                                {
-                                    <span class="badge bg-primary">
-                                        @item.Estado
-                                    </span>
-                                }
-                                else if (item.Estado == "En Curso")
-                                {
-                                    <span class="badge bg-warning text-dark">
-                                        @item.Estado
-                                    </span>
-                                }
-                                else if (item.Estado == "Finalizado")
-                                {
-                                    <span class="badge bg-success">
-                                        @item.Estado
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">
-                                        @item.Estado
-                                    </span>
-                                }
-
-                            </td>
-
-                            <td>
-
-                                <a asp-action="Details"
-                                   asp-route-id="@item.IdProgramacionTurno"
-                                   class="btn btn-info btn-sm">
-
-                                    <i class="bi bi-eye"></i>
-
-                                </a>
-
-                                <a asp-action="Edit"
-                                   asp-route-id="@item.IdProgramacionTurno"
-                                   class="btn btn-warning btn-sm">
-
-                                    <i class="bi bi-pencil-square"></i>
-
-                                </a>
-
-                                <form asp-action="Delete"
-                                      asp-route-id="@item.IdProgramacionTurno"
-                                      method="post"
-                                      class="d-inline">
-
-                                    @Html.AntiForgeryToken()
-
-                                    <button type="submit"
-                                            class="btn btn-danger btn-sm"
-                                            onclick="return confirm('¿Desea cancelar esta programación?');">
-
-                                        <i class="bi bi-trash"></i>
-
-                                    </button>
-
-                                </form>
-
-                            </td>
-
                         </tr>
                     }
+
+                </tbody>
                 }
                 else
                 {
                     <tr>
 
-                        <td colspan="5" class="text-center">
+                        <td colspan="6" class="text-center">
 
                             No existen programaciones registradas.
 

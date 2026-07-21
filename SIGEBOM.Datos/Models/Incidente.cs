@@ -8,6 +8,9 @@ namespace SIGEBOM.Datos.Models
     {
         [Key]
         public int IdIncidente { get; set; }
+        // Llave foránea de la programación del turno
+        [Required]
+        public int IdProgramacionTurno { get; set; }
 
         [Required(ErrorMessage = "La dirección es obligatoria.")]
         [StringLength(150)]
@@ -50,6 +53,9 @@ namespace SIGEBOM.Datos.Models
 
         [ForeignKey(nameof(IdTipoIncidente))]
         public TipoIncidente TipoIncidente { get; set; } = null!;
+
+        [ForeignKey(nameof(IdProgramacionTurno))]
+        public ProgramacionTurno ProgramacionTurno { get; set; } = null!;
 
         // Relación con Bomberos
         public ICollection<BomberoIncidente> BomberosIncidentes { get; set; } = new List<BomberoIncidente>();

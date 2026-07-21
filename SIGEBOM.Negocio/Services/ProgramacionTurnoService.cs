@@ -19,15 +19,14 @@ namespace SIGEBOM.Negocio.Services
             _context = context;
             _detalleService = detalleService;
         }
-        //=========================================
-        // OBTENER TODAS LAS PROGRAMACIONES
-        //=========================================
+
 
         public async Task<List<ProgramacionTurno>> ObtenerTodos(DateOnly? fecha)
         {
             var consulta = _context.ProgramacionTurnos
                 .Include(p => p.Turno)
                 .Include(p => p.Encargado)
+                .Include(p => p.DetallesProgramacion)
                 .Where(p => p.Estado != "Cancelado")
                 .AsQueryable();
 
@@ -40,8 +39,6 @@ namespace SIGEBOM.Negocio.Services
                 .OrderByDescending(p => p.Fecha)
                 .ToListAsync();
         }
-
-
 
         public async Task<ProgramacionTurno?> ObtenerPorId(int id)
         {
@@ -200,10 +197,6 @@ namespace SIGEBOM.Negocio.Services
             }
         }
 
-        //=========================================
-        // ACTUALIZAR
-        //=========================================
-
         public async Task<ResultadoOperacion> Actualizar(
             ProgramacionTurno programacion,
             List<int> bomberos)
@@ -279,9 +272,7 @@ namespace SIGEBOM.Negocio.Services
             }
         }
 
-        //=========================================
-        // DESACTIVAR
-        //=========================================
+
 
         public async Task<ResultadoOperacion> Desactivar(int id)
         {
@@ -372,6 +363,129 @@ namespace SIGEBOM.Negocio.Services
             {
                 Programacion = programacion,
                 Bomberos = bomberos
+            };
+        }
+
+        public async Task<ResultadoOperacion> GenerarSemana(DateTime fechaInicio)
+        {
+            try
+            {
+                // Validar que la fecha seleccionada sea lunes
+                if (fechaInicio.DayOfWeek != DayOfWeek.Monday)
+                {
+                    return new ResultadoOperacion
+                    {
+                        Exitoso = false,
+                        Mensaje = "La fecha seleccionada debe ser un lunes."
+                    };
+                }
+
+                DateOnly fechaInicioOnly = DateOnly.FromDateTime(fechaInicio);
+                DateOnly fechaFinOnly = DateOnly.FromDateTime(fechaInicio.AddDays(6));
+
+                bool existe = await _context.ProgramacionTurnos
+                    .AnyAsync(x => x.Fecha >= fechaInicioOnly &&
+                                   x.Fecha <= fechaFinOnly);
+
+                if (existe)
+                {
+                    return new ResultadoOperacion
+                    {
+                        Exitoso = false,
+                        Mensaje = "Ya existe una programación para esa semana."
+                    };
+                }
+
+                // Obtener todos los turnos activos
+                var turnos = await _context.Turnos
+                    .Where(x => x.Estado == "Activo")
+                    .OrderBy(x => x.IdTurno)
+                    .ToListAsync();
+
+                if (!turnos.Any())
+                {
+                    return new ResultadoOperacion
+                    {
+                        Exitoso = false,
+                        Mensaje = "No existen turnos activos."
+                    };
+                }
+
+                var programaciones = new List<ProgramacionTurno>();
+
+                // Crear las programaciones de los 7 días
+                for (int dia = 0; dia < 7; dia++)
+                {
+                    DateOnly fecha = DateOnly.FromDateTime(fechaInicio.AddDays(dia));
+
+                    foreach (var turno in turnos)
+                    {
+
+                        programaciones.Add(new ProgramacionTurno
+                        {
+                            Fecha = fecha,
+                            IdTurno = turno.IdTurno,
+                            Estado = "Programado"
+                        });
+                    }
+                }
+
+                await _context.ProgramacionTurnos.AddRangeAsync(programaciones);
+                await _context.SaveChangesAsync();
+
+                return new ResultadoOperacion
+                {
+                    Exitoso = true,
+                    Mensaje = $"Se generaron {programaciones.Count} programaciones correctamente."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResultadoOperacion
+                {
+                    Exitoso = false,
+                    Mensaje = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
+        public async Task<ResultadoOperacion> CambiarEstado(int id)
+        {
+            var programacion = await _context.ProgramacionTurnos
+                .FirstOrDefaultAsync(x => x.IdProgramacionTurno == id);
+
+            if (programacion == null)
+            {
+                return new ResultadoOperacion
+                {
+                    Exitoso = false,
+                    Mensaje = "La programación no existe."
+                };
+            }
+
+            if (programacion.Estado == "Programado")
+            {
+                programacion.Estado = "En Curso";
+            }
+            else if (programacion.Estado == "En Curso")
+            {
+                programacion.Estado = "Finalizado";
+            }
+            else
+            {
+                return new ResultadoOperacion
+                {
+                    Exitoso = false,
+                    Mensaje = "La programación ya no puede cambiar de estado."
+                };
+            }
+
+            await _context.SaveChangesAsync();
+
+            return new ResultadoOperacion
+            {
+                Exitoso = true,
+                Mensaje = "Estado actualizado correctamente."
             };
         }
     }

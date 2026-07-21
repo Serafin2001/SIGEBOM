@@ -32,6 +32,12 @@ namespace SIGEBOM.Presentacion.Controllers
 
             ViewBag.Fecha = fecha;
 
+            ViewBag.Total = lista.Count;
+            ViewBag.Programadas = lista.Count(x => x.Estado == "Programado");
+            ViewBag.EnCurso = lista.Count(x => x.Estado == "En Curso");
+            ViewBag.Finalizadas = lista.Count(x => x.Estado == "Finalizado");
+            ViewBag.Canceladas = lista.Count(x => x.Estado == "Cancelado");
+
             return View(lista);
         }
 
@@ -177,5 +183,24 @@ namespace SIGEBOM.Presentacion.Controllers
         {
             modelo.Turnos = await _turnoService.ObtenerTodos(null);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CambiarEstado(int id)
+        {
+            var resultado = await _programacionTurnoService.CambiarEstado(id);
+
+            if (resultado.Exitoso)
+            {
+                TempData["Success"] = resultado.Mensaje;
+            }
+            else
+            {
+                TempData["Error"] = resultado.Mensaje;
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

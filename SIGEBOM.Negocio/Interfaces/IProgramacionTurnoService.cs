@@ -1,6 +1,7 @@
 ﻿using SIGEBOM.Datos.Models;
 using SIGEBOM.Negocio.DTOs;
 using SIGEBOM.Negocio.ViewModels;
+using System.Net.NetworkInformation;
 
 namespace SIGEBOM.Negocio.Interfaces
 {
@@ -24,5 +25,8 @@ namespace SIGEBOM.Negocio.Interfaces
 
         Task<ProgramacionTurnoViewModel?> ObtenerViewModelEditar(int id);
         Task<ProgramacionTurnoDetailsViewModel?> ObtenerDetalle(int id);
+        Task<ResultadoOperacion> GenerarSemana(DateTime fechaInicio);
+        Task<ResultadoOperacion> CambiarEstado(int id);
     }
+
 }

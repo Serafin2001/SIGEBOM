@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SIGEBOM.Negocio.Interfaces;
+using SIGEBOM.Negocio.Services;
 using SIGEBOM.Negocio.ViewModels;
 
 namespace SIGEBOM.Presentacion.Controllers
@@ -7,10 +8,13 @@ namespace SIGEBOM.Presentacion.Controllers
     public class IncidenteController : Controller
     {
         private readonly IIncidenteService _incidenteService;
+        private readonly IProgramacionTurnoService _programacionTurnoService;
 
         public IncidenteController(IIncidenteService incidenteService)
         {
             _incidenteService = incidenteService;
+           
+
         }
 
         //=========================================
@@ -38,9 +42,7 @@ namespace SIGEBOM.Presentacion.Controllers
             return View(incidente);
         }
 
-        //=========================================
-        // CREATE
-        //=========================================
+        
 
         public async Task<IActionResult> Create(int idLlamada)
         {
@@ -73,9 +75,7 @@ namespace SIGEBOM.Presentacion.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //=========================================
-        // EDIT
-        //=========================================
+   
 
         public async Task<IActionResult> Edit(int id)
         {

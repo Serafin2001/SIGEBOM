@@ -52,5 +52,6 @@ namespace SIGEBOM.Datos.Models
 
         public virtual ICollection<DetalleProgramacionTurno> DetallesProgramacion { get; set; }
             = new List<DetalleProgramacionTurno>();
+        public ICollection<Incidente> Incidentes { get; set; } = new List<Incidente>();
     }
 }

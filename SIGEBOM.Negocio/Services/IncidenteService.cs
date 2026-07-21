@@ -16,9 +16,7 @@ namespace SIGEBOM.Negocio.Servicios
             _context = context;
         }
 
-        //=========================================
-        // OBTENER TODOS
-        //=========================================
+    
 
         public async Task<List<Incidente>> ObtenerTodos()
         {
@@ -29,9 +27,7 @@ namespace SIGEBOM.Negocio.Servicios
                 .ToListAsync();
         }
 
-        //=========================================
-        // OBTENER POR ID
-        //=========================================
+
 
         public async Task<Incidente?> ObtenerPorId(int id)
         {
@@ -41,9 +37,6 @@ namespace SIGEBOM.Negocio.Servicios
                 .FirstOrDefaultAsync(i => i.IdIncidente == id);
         }
 
-        //=========================================
-        // OBTENER VIEWMODEL EDITAR
-        //=========================================
 
         public async Task<IncidenteViewModel?> ObtenerViewModelEditar(int id)
         {
@@ -69,9 +62,7 @@ namespace SIGEBOM.Negocio.Servicios
             };
         }
 
-        //=========================================
-        // OBTENER DESDE LLAMADA
-        //=========================================
+
 
         public async Task<IncidenteViewModel?> ObtenerDesdeLlamada(int idLlamada)
         {
@@ -93,9 +84,7 @@ namespace SIGEBOM.Negocio.Servicios
             };
         }
 
-        //=========================================
-        // CREAR
-        //=========================================
+
 
         public async Task<ResultadoOperacion> Crear(IncidenteViewModel model)
         {

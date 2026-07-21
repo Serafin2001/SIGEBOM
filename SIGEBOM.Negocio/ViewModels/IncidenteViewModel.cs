@@ -42,5 +42,10 @@ namespace SIGEBOM.Negocio.ViewModels
         [Display(Name = "Descripción del Incidente")]
         [StringLength(500)]
         public string Descripcion { get; set; } = string.Empty;
+
+        
+        [Required(ErrorMessage = "La programación del turno es obligatoria.")]
+        [Display(Name = "Programación del Turno")]
+        public int IdProgramacionTurno { get; set; }
     }
 }
