@@ -6,7 +6,7 @@ using SIGEBOM.Negocio.Interfaces;
 using SIGEBOM.Negocio.ViewModels;
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UsuariosController : Controller
     {
         private readonly IUsuarioService _usuarioService;

@@ -1,0 +1,165 @@
+﻿@model IEnumerable<SIGEBOM.Datos.Models.Proveedor>
+
+@{
+    ViewData["Title"] = "Proveedores";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h4 class="mb-0">
+                    Proveedores
+                </h4>
+
+                <a asp-action="Create" class="btn btn-light">
+
+                    <i class="bi bi-plus-circle"></i>
+
+                    Nuevo Proveedor
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="get">
+
+                <div class="row mb-3">
+
+                    <div class="col-md-6">
+
+                        <div class="input-group">
+
+                            <input name="buscar"
+                                   value="@ViewData["Buscar"]"
+                                   class="form-control"
+                                   placeholder="Buscar por nombre, teléfono o correo..." />
+
+                            <button type="submit" class="btn btn-danger">
+
+                                <i class="bi bi-search"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <table class="table table-hover table-bordered align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Dirección</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th width="220">Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @if (Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.Nombre</td>
+
+                                <td>@item.Telefono</td>
+
+                                <td>@item.Correo</td>
+
+                                <td>@item.Direccion</td>
+
+                                <td>@item.Fecha.ToShortDateString()</td>
+
+                                <td>
+
+                                    @if (item.Estado == "Activo")
+                                    {
+                                        <span class="badge bg-success">
+                                            Activo
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">
+                                            Inactivo
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <td>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.IdProveedor"
+                                       class="btn btn-warning btn-sm">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.IdProveedor"
+                                       class="btn btn-info btn-sm">
+
+                                        <i class="bi bi-eye"></i>
+
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.IdProveedor"
+                                       class="btn btn-danger btn-sm">
+
+                                        <i class="bi bi-trash"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+
+                            <td colspan="7" class="text-center">
+
+                                No existen registros.
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

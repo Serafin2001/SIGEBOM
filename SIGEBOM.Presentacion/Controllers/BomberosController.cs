@@ -6,7 +6,7 @@ using SIGEBOM.Negocio.Interfaces;
 
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize(Roles = "Administrador,Oficial")]
+    //[Authorize(Roles = "Administrador,Oficial")]
     public class BomberosController : Controller
     {
         private readonly IBomberoService _bomberoService;

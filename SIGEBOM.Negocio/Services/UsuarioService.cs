@@ -227,10 +227,9 @@ namespace SIGEBOM.Negocio.Services
             {
                 return null;
             }
-
-            bool passwordCorrecta = BCrypt.Net.BCrypt.Verify(
-                contraseña,
-                usuario.Contraseña);
+           bool passwordCorrecta = BCrypt.Net.BCrypt.Verify(
+            contraseña,
+            usuario.Contraseña);
 
             if (!passwordCorrecta)
             {

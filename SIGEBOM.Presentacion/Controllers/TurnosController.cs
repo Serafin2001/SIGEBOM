@@ -5,7 +5,7 @@ using SIGEBOM.Negocio.Interfaces;
 
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize(Roles = "Administrador,Oficial")]
+    //[Authorize(Roles = "Administrador,Oficial")]
     public class TurnosController : Controller
     {
         private readonly ITurnoService _turnoService;

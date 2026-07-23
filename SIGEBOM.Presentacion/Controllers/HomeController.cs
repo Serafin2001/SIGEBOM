@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

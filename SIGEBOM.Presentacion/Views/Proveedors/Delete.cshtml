@@ -1,0 +1,126 @@
+﻿@model SIGEBOM.Datos.Models.Proveedor
+
+@{
+    ViewData["Title"] = "Eliminar Proveedor";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+                Eliminar Proveedor
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+
+                <i class="bi bi-exclamation-triangle-fill"></i>
+
+                <strong>¿Está seguro de que desea eliminar este proveedor?</strong>
+
+                <br />
+
+                Esta acción no se podrá deshacer.
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th width="35%">Nombre</th>
+                            <td>@Model.Nombre</td>
+                        </tr>
+
+                        <tr>
+                            <th>Teléfono</th>
+                            <td>@Model.Telefono</td>
+                        </tr>
+
+                        <tr>
+                            <th>Correo</th>
+                            <td>@Model.Correo</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th width="35%">Dirección</th>
+                            <td>@Model.Direccion</td>
+                        </tr>
+
+                        <tr>
+                            <th>Fecha</th>
+                            <td>@Model.Fecha.ToShortDateString()</td>
+                        </tr>
+
+                        <tr>
+                            <th>Estado</th>
+                            <td>
+                                @if (Model.Estado == "Activo")
+                                {
+                                    <span class="badge bg-success">
+                                        Activo
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+                                        Inactivo
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer d-flex justify-content-between">
+
+            <a asp-action="Index" class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Regresar
+
+            </a>
+
+            <form asp-action="Delete" method="post" class="d-inline">
+
+                <input type="hidden" asp-for="IdProveedor" />
+
+                <button type="submit" class="btn btn-danger">
+
+                    <i class="bi bi-trash"></i>
+
+                    Eliminar
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

@@ -5,7 +5,7 @@ using SIGEBOM.Negocio.Interfaces;
 
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CargosController : Controller
     {
         private readonly ICargoService _cargoService;

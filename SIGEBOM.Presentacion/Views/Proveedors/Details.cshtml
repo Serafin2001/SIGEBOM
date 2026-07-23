@@ -1,0 +1,109 @@
+﻿@model SIGEBOM.Datos.Models.Proveedor
+
+@{
+    ViewData["Title"] = "Detalle del Proveedor";
+}
+
+<div class="container-fluid">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+                Detalle del Proveedor
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th width="35%">Nombre</th>
+                            <td>@Model.Nombre</td>
+                        </tr>
+
+                        <tr>
+                            <th>Teléfono</th>
+                            <td>@Model.Telefono</td>
+                        </tr>
+
+                        <tr>
+                            <th>Correo</th>
+                            <td>@Model.Correo</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th width="35%">Dirección</th>
+                            <td>@Model.Direccion</td>
+                        </tr>
+
+                        <tr>
+                            <th>Fecha</th>
+                            <td>@Model.Fecha.ToShortDateString()</td>
+                        </tr>
+
+                        <tr>
+                            <th>Estado</th>
+                            <td>
+                                @if (Model.Estado == "Activo")
+                                {
+                                    <span class="badge bg-success">
+                                        Activo
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+                                        Inactivo
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.IdProveedor"
+               class="btn btn-warning">
+
+                <i class="bi bi-pencil-square"></i>
+                Editar
+
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left"></i>
+                Regresar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

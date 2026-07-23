@@ -5,7 +5,7 @@ using SIGEBOM.Negocio.Interfaces;
 
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public class RangosController : Controller
     {
         private readonly IRangoService _rangoService;

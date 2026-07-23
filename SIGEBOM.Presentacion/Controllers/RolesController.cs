@@ -5,7 +5,7 @@ using SIGEBOM.Negocio.Interfaces;
 
 namespace SIGEBOM.Presentacion.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public class RolesController : Controller
     {
         private readonly IRolService _rolService;
